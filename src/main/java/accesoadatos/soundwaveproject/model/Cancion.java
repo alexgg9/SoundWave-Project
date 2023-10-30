@@ -1,19 +1,23 @@
 package accesoadatos.soundwaveproject.model;
 
+import java.sql.Time;
+import java.util.Objects;
+
 public class Cancion {
     private int id;
     private String nombre;
-    private String duracion;
+    private Time duracion;
     private String genero;
 
-    public Cancion(int id, String nombre, String duracion, String genero) {
+    public Cancion(int id, String nombre, Time duracion, String genero) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
         this.genero = genero;
     }
 
-    public int getId() {
+
+	public int getId() {
         return id;
     }
 
@@ -21,7 +25,7 @@ public class Cancion {
         return nombre;
     }
 
-    public String getDuracion() {
+    public Time getDuracion() {
         return duracion;
     }
 
@@ -29,14 +33,52 @@ public class Cancion {
         return genero;
     }
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public void setDuracion(Time duracion) {
+		this.duracion = duracion;
+	}
+
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
     @Override
+	public int hashCode() {
+		return Objects.hash(duracion, genero, id, nombre);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cancion other = (Cancion) obj;
+		return Objects.equals(duracion, other.duracion) && Objects.equals(genero, other.genero) && id == other.id
+				&& Objects.equals(nombre, other.nombre);
+	}
+
+
+
+
+	@Override
     public String toString() {
         return "ID: " + id + ", Nombre: " + nombre + ", Duración: " + duracion + ", Género: " + genero;
     }
 
-    public static void main(String[] args) {
-        Cancion miCancion = new Cancion(1, "Mi Canción Favorita", "3:45", "Pop");
-        System.out.println(miCancion);
-    }
+   
 }
 
