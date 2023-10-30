@@ -4,6 +4,8 @@ module accesoadatos.soundwaveproject {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires java.xml.bind;
+    requires java.sql;
 
     opens accesoadatos.soundwaveproject to javafx.fxml;
     exports accesoadatos.soundwaveproject;
