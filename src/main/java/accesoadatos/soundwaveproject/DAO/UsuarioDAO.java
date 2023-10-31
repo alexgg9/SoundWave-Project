@@ -78,23 +78,24 @@ public class UsuarioDAO extends Usuario {
         }
     }
 
-    public boolean getByDni(String dni) {
+    public static Usuario getByDni(String dni) {
+        Usuario usuario = null;
         try (PreparedStatement ps = connection.prepareStatement(SELECTBYID)) {
             ps.setString(1, dni);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    this.setDni(rs.getString("dni"));
-                    this.setNombre(rs.getString("nombre"));
-                    this.setCorreo(rs.getString("correo"));
-                    this.setContraseña(rs.getString("contraseña"));
-                    this.setFoto(rs.getBytes("foto"));
-                    return true;
+                    usuario = new Usuario();
+                    usuario.setDni(rs.getString("dni"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setContraseña(rs.getString("contraseña"));
+                    usuario.setFoto(rs.getBytes("foto"));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Manejo de excepciones en caso de error
         }
-        return false;
+        return usuario;
     }
 
     public static List<Usuario> getAll() {

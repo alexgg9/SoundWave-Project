@@ -1,6 +1,7 @@
 package accesoadatos.soundwaveproject.model;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Artista {
@@ -8,6 +9,8 @@ public class Artista {
    private String nombre;
    private String nacionalidad;
    private byte [] foto;
+
+   private List<Disco> discos;
 
     public String getDni() {
         return dni;
