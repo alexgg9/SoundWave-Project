@@ -8,21 +8,21 @@ public class Lista {
     private String nombre;
     private String descripcion;
     private String dni_usuario;
-    private int suscripciones;
-    Usuario creados;
+    private List<Usuario> suscripciones;
+    private Usuario creador;
     List<Comentario> comentarios;
     List<Usuario> seguidores;
 
     public Lista() {
     }
 
-    public Lista(int id, String nombre, String descripcion, String dni_usuario, int suscripciones, Usuario creados, List<Comentario> comentarios, List<Usuario> seguidores) {
+    public Lista(int id, String nombre, String descripcion, String dni_usuario, List<Usuario> suscripciones, Usuario creador, List<Comentario> comentarios, List<Usuario> seguidores) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.dni_usuario = dni_usuario;
         this.suscripciones = suscripciones;
-        this.creados = creados;
+        this.creador = creador;
         this.comentarios = comentarios;
         this.seguidores = seguidores;
     }
@@ -59,20 +59,20 @@ public class Lista {
         this.dni_usuario = dni_usuario;
     }
 
-    public int getSuscripciones() {
+    public List<Usuario> getSuscripciones() {
         return suscripciones;
     }
 
-    public void setSuscripciones(int suscripciones) {
+    public void setSuscripciones(List<Usuario> suscripciones) {
         this.suscripciones = suscripciones;
     }
 
     public Usuario getCreados() {
-        return creados;
+        return creador;
     }
 
     public void setCreados(Usuario creados) {
-        this.creados = creados;
+        this.creador = creados;
     }
 
     public List<Comentario> getComentarios() {
@@ -110,11 +110,12 @@ public class Lista {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", dni_usuario='" + dni_usuario + '\'' +
+                ", creador='" + dni_usuario + '\'' +
                 ", suscripciones=" + suscripciones +
-                ", creados=" + creados +
+                ", creados=" + creador +
                 ", comentarios=" + comentarios +
                 ", seguidores=" + seguidores +
                 '}';
     }
+
 }
