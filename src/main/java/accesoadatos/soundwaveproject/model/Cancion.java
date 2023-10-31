@@ -9,6 +9,8 @@ public class Cancion {
     private int duracion;
     private String genero;
 
+	private String url;
+
     public Cancion(int id, String nombre, int duracion, String genero) {
         this.id = id;
         this.nombre = nombre;
@@ -16,6 +18,13 @@ public class Cancion {
         this.genero = genero;
     }
 
+	public Cancion() {
+
+	}
+
+	public String getUrl() {
+		return url;
+	}
 
 	public int getId() {
         return id;
