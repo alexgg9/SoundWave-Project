@@ -7,24 +7,24 @@ public class Comentario {
     private int id;
     private String contenido;
     private Date fecha;
-    private Usuario dniU;
-    private Lista idL;
+    private Usuario usuario;
+    private Lista lista;
 
     public Comentario() {
         this.id=0;
         this.contenido="";
         this.fecha=null;
-        this.dniU=null;
-        this.idL=null;
+        this.usuario=null;
+        this.lista=null;
 
     }
 
-    public Comentario(int id, String contenido, Date fecha, Usuario dniU, Lista idL) {
+    public Comentario(int id, String contenido, Date fecha, Usuario usuario, Lista lista) {
         this.id = id;
         this.contenido = contenido;
         this.fecha = fecha;
-        this.dniU = dniU;
-        this.idL = idL;
+        this.usuario = usuario;
+        this.lista = lista;
     }
 
     public int getId() {
@@ -51,20 +51,20 @@ public class Comentario {
         this.fecha = fecha;
     }
 
-    public Usuario getDniU() {
-        return dniU;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setDniU(Usuario dniU) {
-        this.dniU = dniU;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Lista getIdL() {
-        return idL;
+    public Lista getLista() {
+        return lista;
     }
 
-    public void setIdL(Lista idL) {
-        this.idL = idL;
+    public void setLista(Lista lista) {
+        this.lista = lista;
     }
 
     @Override
@@ -86,8 +86,8 @@ public class Comentario {
                 "id=" + id +
                 ", contenido='" + contenido + '\'' +
                 ", fecha=" + fecha +
-                ", dniU=" + dniU +
-                ", idL=" + idL +
+                ", usuario=" + usuario +
+                ", lista=" + lista +
                 '}';
     }
 }

@@ -32,6 +32,7 @@ public class ConnectionMySQL {
     }
 
 
+
     public  ConnectionData loadXML() {
         ConnectionData con = new ConnectionData();
         JAXBContext jaxbContext;
