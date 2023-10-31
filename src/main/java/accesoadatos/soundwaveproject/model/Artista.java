@@ -9,8 +9,8 @@ public class Artista {
    private String nombre;
    private String nacionalidad;
    private byte [] foto;
-
    private List<Disco> discos;
+
 
     public String getDni() {
         return dni;
@@ -44,6 +44,14 @@ public class Artista {
         this.foto = foto;
     }
 
+    public List<Disco> getDiscos() {
+        return discos;
+    }
+
+    public void setDiscos(List<Disco> discos) {
+        this.discos = discos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +72,7 @@ public class Artista {
                 ", nombre='" + nombre + '\'' +
                 ", nacionalidad='" + nacionalidad + '\'' +
                 ", foto=" + Arrays.toString(foto) +
+                ", discos=" + discos +
                 '}';
     }
 }
