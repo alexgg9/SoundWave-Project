@@ -8,6 +8,7 @@ public class Cancion {
     private String nombre;
     private int duracion;
     private String genero;
+	private int id_disco;
 
 	private String url;
 
@@ -18,8 +19,22 @@ public class Cancion {
         this.genero = genero;
     }
 
+
 	public Cancion() {
 
+	}
+
+	public int getId_disco() {
+		return id_disco;
+	}
+
+	public void setId_disco(int id_disco) {
+		this.id_disco = id_disco;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getUrl() {

@@ -9,16 +9,15 @@ import java.sql.SQLException;
 
 public class CancionDAO {
 
-    private final static String INSERT ="INSERT INTO cancion (id, nombre, duracion ,genero,url) VALUES (?,?,?,?,?)";
+    private final static String INSERT = "INSERT INTO cancion (id, nombre, duracion, genero, url, id_disco) VALUES (?,?,?,?,?,?)";
 
-    private final static String UPDATE ="UPDATE cancion SET nombre = ?, duracion = ?, genero = ?, url = ? WHERE id = ?";
+    private final static String UPDATE = "UPDATE cancion SET nombre = ?, duracion = ?, genero = ?, url = ?, id_disco = ? WHERE id = ?";
 
     private final static String DELETE = "DELETE FROM cancion WHERE id = ?";
 
-    private final static String SearchById = "SELECT id, nombre, duracion, genero FROM cancion WHERE id = ?";
+    private final static String SearchById = "SELECT id, nombre, duracion, genero, id_disco FROM cancion WHERE id = ?";
 
-    private  final static  String SearchAll = "SELECT id, nombre, duracion, genero  FROM cancion LIMIT 15";
-
+    private final static String SearchAll = "SELECT id, nombre, duracion, genero, id_disco FROM cancion LIMIT 15";
 
     private Connection connection;
 
@@ -26,24 +25,26 @@ public class CancionDAO {
         this.connection = connection;
     }
 
-    public void insertCancion(Cancion cancion) throws SQLException, SQLException {
-
+    public void insertCancion(Cancion cancion) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
-            ps.setString(1, cancion.getNombre());
-            ps.setInt(2, cancion.getDuracion());
-            ps.setString(3, cancion.getGenero());
-            ps.setString(4, cancion.getUrl());
+            ps.setInt(1, cancion.getId());
+            ps.setString(2, cancion.getNombre());
+            ps.setInt(3, cancion.getDuracion());
+            ps.setString(4, cancion.getGenero());
+            ps.setString(5, cancion.getUrl());
+            ps.setInt(6, cancion.getId_disco());
             ps.executeUpdate();
         }
     }
 
     public void updateCancion(Cancion cancion) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(UPDATE)) {
-            ps.setString(1, cancion.getNombre());
-            ps.setInt(2, cancion.getDuracion());
-            ps.setString(3, cancion.getGenero());
-            ps.setString(4, cancion.getUrl());
-            ps.setInt(5, cancion.getId());
+            ps.setInt(1, cancion.getId());
+            ps.setString(2, cancion.getNombre());
+            ps.setInt(3, cancion.getDuracion());
+            ps.setString(4, cancion.getGenero());
+            ps.setString(5, cancion.getUrl());
+            ps.setInt(6, cancion.getId_disco());
             ps.executeUpdate();
         }
     }
@@ -55,9 +56,7 @@ public class CancionDAO {
         }
     }
 
-
     public Cancion getCancionById(int id) throws SQLException {
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(SearchById)) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -67,6 +66,7 @@ public class CancionDAO {
                     cancion.setNombre(resultSet.getString("nombre"));
                     cancion.setDuracion(resultSet.getInt("duracion"));
                     cancion.setGenero(resultSet.getString("genero"));
+                    cancion.setId_disco(resultSet.getInt("id_disco")); // Nuevo campo id_disco
                     return cancion;
                 }
             }

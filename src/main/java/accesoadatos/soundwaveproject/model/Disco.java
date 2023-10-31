@@ -1,8 +1,9 @@
 package accesoadatos.soundwaveproject.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Disco {
@@ -11,6 +12,16 @@ public class Disco {
     private LocalDate fechaPublicacion;
     private byte [] foto;
     private String reproducion;
+
+   private  List<Cancion> Canciones;
+
+    public Disco(List<Cancion> canciones) {
+        Canciones = canciones;
+    }
+
+    public Disco() {
+
+    }
 
     public String getDni() {
         return dni;
