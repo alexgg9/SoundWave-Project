@@ -110,11 +110,12 @@ public class Lista {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", dni_usuario='" + dni_usuario + '\'' +
+                ", creador='" + dni_usuario + '\'' +
                 ", suscripciones=" + suscripciones +
                 ", creados=" + creador +
                 ", comentarios=" + comentarios +
                 ", seguidores=" + seguidores +
                 '}';
     }
+
 }
