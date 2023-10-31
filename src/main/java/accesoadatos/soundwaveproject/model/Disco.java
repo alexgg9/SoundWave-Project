@@ -7,28 +7,38 @@ import java.util.List;
 import java.util.Objects;
 
 public class Disco {
-    private String dni;
+    private int id;
     private String nombre;
     private LocalDate fechaPublicacion;
     private byte [] foto;
     private String reproducion;
-
-   private  List<Cancion> Canciones;
+    private Artista artista;
+    private  List<Cancion> canciones;
 
     public Disco(List<Cancion> canciones) {
-        Canciones = canciones;
+        canciones = canciones;
     }
 
     public Disco() {
 
     }
 
-    public String getDni() {
-        return dni;
+    public Disco(int id, String nombre, LocalDate fechaPublicacion, byte[] foto, String reproducion, Artista artista, List<Cancion> canciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaPublicacion = fechaPublicacion;
+        this.foto = foto;
+        this.reproducion = reproducion;
+        this.artista = artista;
+        this.canciones = canciones;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -63,27 +73,45 @@ public class Disco {
         this.reproducion = reproducion;
     }
 
+    public Artista getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Artista artista) {
+        this.artista = artista;
+    }
+
+    public List<Cancion> getCanciones() {
+        return canciones;
+    }
+
+    public void setCanciones(List<Cancion> canciones) {
+        this.canciones = canciones;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Disco disco = (Disco) o;
-        return dni.equals(disco.dni);
+        return id == disco.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dni);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Disco{" +
-                "dni='" + dni + '\'' +
+                "dni='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fechaPublicacion=" + fechaPublicacion +
                 ", foto=" + Arrays.toString(foto) +
                 ", reproducion='" + reproducion + '\'' +
+                ", artista=" + artista +
+                ", Canciones=" + canciones +
                 '}';
     }
 }

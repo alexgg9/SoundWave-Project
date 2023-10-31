@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2023 a las 14:11:03
+-- Tiempo de generación: 31-10-2023 a las 16:41:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,17 +32,6 @@ CREATE TABLE `artista` (
   `nombre` varchar(256) NOT NULL,
   `nacionalidad` varchar(256) NOT NULL,
   `foto` longblob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `artista_disco`
---
-
-CREATE TABLE `artista_disco` (
-  `dni_artista` varchar(9) NOT NULL,
-  `id_disco` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,7 +85,8 @@ CREATE TABLE `disco` (
   `nombre` varchar(256) NOT NULL,
   `fecha_publicacion` date NOT NULL,
   `foto` longblob NOT NULL,
-  `reproducciones` int(11) NOT NULL
+  `reproducciones` int(11) NOT NULL,
+  `dni_artista` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -149,13 +139,6 @@ ALTER TABLE `artista`
   ADD PRIMARY KEY (`dni`);
 
 --
--- Indices de la tabla `artista_disco`
---
-ALTER TABLE `artista_disco`
-  ADD PRIMARY KEY (`dni_artista`,`id_disco`) USING BTREE,
-  ADD KEY `id_disco` (`id_disco`);
-
---
 -- Indices de la tabla `cancion`
 --
 ALTER TABLE `cancion`
@@ -181,7 +164,8 @@ ALTER TABLE `comentario`
 -- Indices de la tabla `disco`
 --
 ALTER TABLE `disco`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dni_artista` (`dni_artista`);
 
 --
 -- Indices de la tabla `lista`
@@ -237,12 +221,6 @@ ALTER TABLE `lista`
 --
 
 --
--- Filtros para la tabla `artista_disco`
---
-ALTER TABLE `artista_disco`
-  ADD CONSTRAINT `artista_disco_ibfk_2` FOREIGN KEY (`id_disco`) REFERENCES `disco` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `cancion`
 --
 ALTER TABLE `cancion`
@@ -261,6 +239,12 @@ ALTER TABLE `cancion_lista`
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_lista`) REFERENCES `lista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `disco`
+--
+ALTER TABLE `disco`
+  ADD CONSTRAINT `disco_ibfk_1` FOREIGN KEY (`dni_artista`) REFERENCES `artista` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `lista`
