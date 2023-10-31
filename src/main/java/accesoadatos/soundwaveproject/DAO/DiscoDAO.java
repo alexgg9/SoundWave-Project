@@ -30,7 +30,7 @@ public class DiscoDAO {
     public void insertDisco(Disco disco) throws SQLException {
 
         try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
-            ps.setString(1, disco.getDni());
+            ps.setInt(1, disco.getId());
             ps.setString(2, disco.getNombre());
             ps.setDate(3, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(4, disco.getFoto());
@@ -45,7 +45,7 @@ public class DiscoDAO {
             ps.setDate(2, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(3, disco.getFoto());
             ps.setString(4, disco.getReproducion());
-            ps.setString(5, disco.getDni());
+            ps.setInt(5, disco.getId());
             ps.executeUpdate();
         }
     }
@@ -64,7 +64,7 @@ public class DiscoDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Disco disco = new Disco();
-                    disco.setDni(resultSet.getString("dni"));
+                    disco.setId(resultSet.getInt("dni"));
                     disco.setNombre(resultSet.getString("nombre"));
                     disco.setFechaPublicacion(resultSet.getDate("fecha_publicacion").toLocalDate());
                     disco.setFoto(resultSet.getBytes("foto"));
