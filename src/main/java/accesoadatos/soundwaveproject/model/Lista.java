@@ -10,8 +10,8 @@ public class Lista {
     private String dni_usuario;
     private List<Usuario> suscripciones;
     private Usuario creador;
-    List<Comentario> comentarios;
-    List<Usuario> seguidores;
+    private List<Comentario> comentarios;
+    private List<Usuario> seguidores;
 
     public Lista() {
     }
