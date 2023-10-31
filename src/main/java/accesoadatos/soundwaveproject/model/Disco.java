@@ -1,5 +1,6 @@
 package accesoadatos.soundwaveproject.model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Objects;
@@ -7,7 +8,7 @@ import java.util.Objects;
 public class Disco {
     private String dni;
     private String nombre;
-    private LocalTime fechaPublicacion;
+    private LocalDate fechaPublicacion;
     private byte [] foto;
     private String reproducion;
 
@@ -27,11 +28,11 @@ public class Disco {
         this.nombre = nombre;
     }
 
-    public LocalTime getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalTime fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 

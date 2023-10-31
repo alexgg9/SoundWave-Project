@@ -6,10 +6,10 @@ import java.util.Objects;
 public class Cancion {
     private int id;
     private String nombre;
-    private Time duracion;
+    private int duracion;
     private String genero;
 
-    public Cancion(int id, String nombre, Time duracion, String genero) {
+    public Cancion(int id, String nombre, int duracion, String genero) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -25,7 +25,7 @@ public class Cancion {
         return nombre;
     }
 
-    public Time getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
@@ -43,7 +43,7 @@ public class Cancion {
 	}
 
 
-	public void setDuracion(Time duracion) {
+	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
 
