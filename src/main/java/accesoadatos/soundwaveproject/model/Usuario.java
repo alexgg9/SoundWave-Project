@@ -10,9 +10,9 @@ public class Usuario {
     private String correo;
     private String contraseña;
     private byte[] foto;
-    List<Lista> misListas;
-    List<Comentario> comentarios;
-    List<Lista> suscripciones;
+    private List<Lista> misListas;
+    private List<Comentario> comentarios;
+    private List<Lista> suscripciones;
 
     public Usuario() {
     }
