@@ -1,5 +1,6 @@
 package accesoadatos.soundwaveproject.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +8,6 @@ public class Lista {
     private int id;
     private String nombre;
     private String descripcion;
-    private String dni_usuario;
     private List<Usuario> suscripciones;
     private Usuario creador;
     private List<Comentario> comentarios;
@@ -16,15 +16,17 @@ public class Lista {
     public Lista() {
     }
 
-    public Lista(int id, String nombre, String descripcion, String dni_usuario, List<Usuario> suscripciones, Usuario creador, List<Comentario> comentarios, List<Usuario> seguidores) {
+    public Lista(int id, String nombre, String descripcion, List<Usuario> suscripciones, Usuario creador, List<Comentario> comentarios, List<Usuario> seguidores) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.dni_usuario = dni_usuario;
         this.suscripciones = suscripciones;
         this.creador = creador;
         this.comentarios = comentarios;
         this.seguidores = seguidores;
+    }
+
+    public Lista(int id, String nombre, String descripcion, ArrayList<Usuario> usuarios, ArrayList<Comentario> comentarios, ArrayList<Usuario> usuarios1) {
     }
 
     public int getId() {
@@ -51,14 +53,6 @@ public class Lista {
         this.descripcion = descripcion;
     }
 
-    public String getDni_usuario() {
-        return dni_usuario;
-    }
-
-    public void setDni_usuario(String dni_usuario) {
-        this.dni_usuario = dni_usuario;
-    }
-
     public List<Usuario> getSuscripciones() {
         return suscripciones;
     }
@@ -67,12 +61,12 @@ public class Lista {
         this.suscripciones = suscripciones;
     }
 
-    public Usuario getCreados() {
+    public Usuario getCreador() {
         return creador;
     }
 
-    public void setCreados(Usuario creados) {
-        this.creador = creados;
+    public void setCreador(Usuario creador) {
+        this.creador = creador;
     }
 
     public List<Comentario> getComentarios() {
@@ -110,9 +104,8 @@ public class Lista {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", creador='" + dni_usuario + '\'' +
                 ", suscripciones=" + suscripciones +
-                ", creados=" + creador +
+                ", creador=" + creador +
                 ", comentarios=" + comentarios +
                 ", seguidores=" + seguidores +
                 '}';
