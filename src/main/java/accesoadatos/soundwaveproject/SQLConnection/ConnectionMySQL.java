@@ -13,7 +13,7 @@ public class ConnectionMySQL {
     private static ConnectionMySQL _newInstance;
     private static Connection con;
 
-    private  ConnectionMySQL() {
+    public ConnectionMySQL() {
         ConnectionData dc = loadXML();
 
         try {

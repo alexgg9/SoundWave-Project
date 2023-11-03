@@ -79,11 +79,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j-MOXy-JAXBContext</artifactId>
             <version>6.0.0</version>
@@ -92,6 +87,12 @@
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j-MOXy-JAXBContext</artifactId>
             <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
