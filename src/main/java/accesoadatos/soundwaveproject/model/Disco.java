@@ -1,6 +1,5 @@
 package accesoadatos.soundwaveproject.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +10,7 @@ public class Disco {
     private String nombre;
     private LocalDate fechaPublicacion;
     private byte [] foto;
-    private String reproducion;
+    private String reproduccion;
     private Artista artista;
     private  List<Cancion> canciones;
 
@@ -28,7 +27,7 @@ public class Disco {
         this.nombre = nombre;
         this.fechaPublicacion = fechaPublicacion;
         this.foto = foto;
-        this.reproducion = reproducion;
+        this.reproduccion = reproducion;
         this.artista = artista;
         this.canciones = canciones;
     }
@@ -65,12 +64,12 @@ public class Disco {
         this.foto = foto;
     }
 
-    public String getReproducion() {
-        return reproducion;
+    public String getReproduccion() {
+        return reproduccion;
     }
 
-    public void setReproducion(String reproducion) {
-        this.reproducion = reproducion;
+    public void setReproduccion(String reproducion) {
+        this.reproduccion = reproducion;
     }
 
     public Artista getArtista() {
@@ -109,7 +108,7 @@ public class Disco {
                 ", nombre='" + nombre + '\'' +
                 ", fechaPublicacion=" + fechaPublicacion +
                 ", foto=" + Arrays.toString(foto) +
-                ", reproducion='" + reproducion + '\'' +
+                ", reproducion='" + reproduccion + '\'' +
                 ", artista=" + artista +
                 ", Canciones=" + canciones +
                 '}';

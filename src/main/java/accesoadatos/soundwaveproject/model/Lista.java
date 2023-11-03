@@ -11,7 +11,7 @@ public class Lista {
     private List<Usuario> suscripciones;
     private Usuario creador;
     private List<Comentario> comentarios;
-    private List<Usuario> seguidores;
+
 
     public Lista() {
     }
@@ -23,7 +23,7 @@ public class Lista {
         this.suscripciones = suscripciones;
         this.creador = creador;
         this.comentarios = comentarios;
-        this.seguidores = seguidores;
+
     }
 
     public Lista(int id, String nombre, String descripcion, ArrayList<Usuario> usuarios, ArrayList<Comentario> comentarios, ArrayList<Usuario> usuarios1) {
@@ -77,13 +77,6 @@ public class Lista {
         this.comentarios = comentarios;
     }
 
-    public List<Usuario> getSeguidores() {
-        return seguidores;
-    }
-
-    public void setSeguidores(List<Usuario> seguidores) {
-        this.seguidores = seguidores;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -107,7 +100,6 @@ public class Lista {
                 ", suscripciones=" + suscripciones +
                 ", creador=" + creador +
                 ", comentarios=" + comentarios +
-                ", seguidores=" + seguidores +
                 '}';
     }
 

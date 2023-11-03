@@ -1,6 +1,8 @@
 package accesoadatos.soundwaveproject.DAO;
 
+import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Cancion;
+import accesoadatos.soundwaveproject.model.Disco;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,33 +23,46 @@ public class CancionDAO {
 
     private Connection connection;
 
-    public CancionDAO(Connection connection) {
-        this.connection = connection;
+    public CancionDAO() {
+        this.connection= ConnectionMySQL.getConnect();
     }
 
-    public void insertCancion(Cancion cancion) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
-            ps.setInt(1, cancion.getId());
-            ps.setString(2, cancion.getNombre());
-            ps.setInt(3, cancion.getDuracion());
-            ps.setString(4, cancion.getGenero());
-            ps.setString(5, cancion.getUrl());
-            ps.setInt(6, cancion.getId_disco());
-            ps.executeUpdate();
+    public Cancion saveCancion(Cancion cancion) throws SQLException {
+        if (cancion == null) {
+            return null;
         }
+
+        Cancion existingCancion = getCancionById(cancion.getId());
+
+        try {
+            PreparedStatement pst;
+            if (existingCancion == null) {
+                pst = connection.prepareStatement(INSERT);
+                pst.setInt(1, cancion.getId());
+                pst.setString(2, cancion.getNombre());
+                pst.setInt(3, cancion.getDuracion());
+                pst.setString(4, cancion.getGenero());
+                pst.setString(5, cancion.getUrl());
+                pst.setInt(6, cancion.getDisco().getId());
+            } else {
+                pst = connection.prepareStatement(UPDATE);
+                pst.setString(1, cancion.getNombre());
+                pst.setInt(2, cancion.getDuracion());
+                pst.setString(3, cancion.getGenero());
+                pst.setString(4, cancion.getUrl());
+                pst.setInt(5, cancion.getDisco().getId());
+                pst.setInt(6, cancion.getId());
+            }
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cancion;
     }
 
-    public void updateCancion(Cancion cancion) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(UPDATE)) {
-            ps.setInt(1, cancion.getId());
-            ps.setString(2, cancion.getNombre());
-            ps.setInt(3, cancion.getDuracion());
-            ps.setString(4, cancion.getGenero());
-            ps.setString(5, cancion.getUrl());
-            ps.setInt(6, cancion.getId_disco());
-            ps.executeUpdate();
-        }
-    }
+
 
     public void deleteCancion(int id) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(DELETE)) {
@@ -66,7 +81,9 @@ public class CancionDAO {
                     cancion.setNombre(resultSet.getString("nombre"));
                     cancion.setDuracion(resultSet.getInt("duracion"));
                     cancion.setGenero(resultSet.getString("genero"));
-                    cancion.setId_disco(resultSet.getInt("id_disco")); // Nuevo campo id_disco
+                    DiscoDAO discoDAO = new DiscoDAO();
+                    Disco d1 = discoDAO.getDiscoById((resultSet.getInt("id_disco")));
+                    cancion.setDisco(d1);
                     return cancion;
                 }
             }

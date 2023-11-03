@@ -11,9 +11,9 @@ import java.util.List;
 
 public class DiscoDAO {
 
-    private final static String INSERT = "INSERT INTO disco (id, nombre, fecha_publicacion, foto, reproducciones, dni_artista) VALUES (?, ?, ?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO disco (id, nombre, fecha_publicacion, foto, reproduccion, dni_artista) VALUES (?, ?, ?, ?, ?, ?)";
 
-    private final static String UPDATE = "UPDATE disco SET id = ?, nombre = ?, fecha_publicacion = ?, foto = ?, reproducciones = ?, dni_artista=? WHERE id = ?";
+    private final static String UPDATE = "UPDATE disco SET id = ?, nombre = ?, fecha_publicacion = ?, foto = ?, reproduccion = ?, dni_artista=? WHERE id = ?";
 
     private final static String DELETE =  "DELETE FROM disco WHERE id = ?";
 
@@ -36,7 +36,7 @@ public class DiscoDAO {
             ps.setString(2, disco.getNombre());
             ps.setDate(3, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(4, disco.getFoto());
-            ps.setString(5, disco.getReproducion());
+            ps.setString(5, disco.getReproduccion());
             ps.setString(6, disco.getArtista().getDni());
             ps.executeUpdate();
         }
@@ -48,7 +48,7 @@ public class DiscoDAO {
             ps.setString(1, disco.getNombre());
             ps.setDate(2, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(3, disco.getFoto());
-            ps.setString(4, disco.getReproducion());
+            ps.setString(4, disco.getReproduccion());
             ps.setString(5, disco.getArtista().getDni());
             ps.setInt(6, disco.getId());
             ps.executeUpdate();
@@ -62,7 +62,7 @@ public class DiscoDAO {
         }
     }
 
-    public Disco getDiscoByInt(int id) throws SQLException {
+    public Disco getDiscoById(int id) throws SQLException {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(SEARCHBYID)) {
             preparedStatement.setInt(1, id);
@@ -73,7 +73,7 @@ public class DiscoDAO {
                     disco.setNombre(resultSet.getString("nombre"));
                     disco.setFechaPublicacion(resultSet.getDate("fecha_publicacion").toLocalDate());
                     disco.setFoto(resultSet.getBytes("foto"));
-                    disco.setReproducion(resultSet.getString("reproduccion"));
+                    disco.setReproduccion(resultSet.getString("reproduccion"));
                     ArtistaDAO artistaDao = new ArtistaDAO();
                     Artista a1 = artistaDao.findByDni(resultSet.getString("dni_artista"));
                     disco.setArtista(a1);
