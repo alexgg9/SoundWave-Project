@@ -1,5 +1,6 @@
 package accesoadatos.soundwaveproject.DAO;
 
+import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Comentario;
 import accesoadatos.soundwaveproject.model.Lista;
 import accesoadatos.soundwaveproject.model.Usuario;
@@ -19,17 +20,17 @@ public class UsuarioDAO extends Usuario {
     private final static String SELECTALL="SELECT dni,nombre,correo,contraseña,foto FROM usuario";
 
     private static Connection connection;
-    public UsuarioDAO(String dni) {
-        getByDni(dni);
+
+    public UsuarioDAO(Connection conn){
+        this.connection = conn;
     }
-    public UsuarioDAO(String dni, String nombre, String correo, String contraseña, byte[] foto, List<Lista> misListas, List<Comentario> comentarios, List<Lista> suscripciones) {
-        super(dni, nombre, correo, contraseña, foto, misListas, comentarios, suscripciones);
+
+    public UsuarioDAO(){
+        this.connection= ConnectionMySQL.getConnect();
     }
 
     public void save(Usuario usuario) throws SQLException {
-        // Verifica si el usuario ya existe en la base de datos
         if (usuarioExists(usuario.getDni())) {
-            // Si el usuario existe, llama al método update en lugar de insertar
             update(usuario);
         } else {
             try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
@@ -42,12 +43,12 @@ public class UsuarioDAO extends Usuario {
             }
         }
     }
-    // Método para verificar si un usuario ya existe en la base de datos
+
     private boolean usuarioExists(String dni) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(SELECTBYID)) {
             ps.setString(1, dni);
             try (ResultSet rs = ps.executeQuery()) {
-                return rs.next(); // Devuelve true si el usuario existe, de lo contrario, false.
+                return rs.next();
             }
         }
     }
@@ -59,24 +60,19 @@ public class UsuarioDAO extends Usuario {
             ps.setBytes(4, usuario.getFoto());
             ps.setString(5, usuario.getDni());
             int rowsAffected = ps.executeUpdate();
-
-            // Si rowsAffected es mayor que 0, significa que se ha actualizado al menos una fila.
             return rowsAffected > 0;
         }
     }
 
-    public boolean remove() {
-        try (PreparedStatement ps = connection.prepareStatement(DELETE)) {
-            ps.setString(1, this.getDni());
-            int rowsAffected = ps.executeUpdate();
-
-            // Si rowsAffected es mayor que 0, significa que se eliminó al menos una fila.
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+    public void delete(Usuario entity) throws SQLException {
+        if (entity != null) {
+            try (PreparedStatement pst = connection.prepareStatement(DELETE)) {
+                pst.setString(1, entity.getDni());
+                pst.executeUpdate();
+            }
         }
     }
+
 
     public static Usuario getByDni(String dni) {
         Usuario usuario = null;
@@ -93,7 +89,7 @@ public class UsuarioDAO extends Usuario {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Manejo de excepciones en caso de error
+            e.printStackTrace();
         }
         return usuario;
     }
@@ -109,7 +105,7 @@ public class UsuarioDAO extends Usuario {
                         rs.getString("correo"),
                         rs.getString("contraseña"),
                         rs.getBytes("foto"),
-                        new ArrayList<Lista>(), // Puedes inicializar estas listas según tus necesidades
+                        new ArrayList<Lista>(),
                         new ArrayList<Comentario>(),
                         new ArrayList<Lista>()
                 );
