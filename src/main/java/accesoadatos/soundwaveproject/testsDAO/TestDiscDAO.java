@@ -24,7 +24,7 @@ public class TestDiscDAO {
                 disco.setFechaPublicacion(LocalDate.of(2022, 10, 15));
                 byte[] foto = Files.readAllBytes(Paths.get(filePathString));
                 disco.setFoto(foto);
-                disco.setReproducion("100000");
+                disco.setReproduccion("100000");
                 ArtistaDAO artistaDAO = new ArtistaDAO();
                 String dniArtista = "87654321C";
                 Artista artistaBuscado = new Artista();

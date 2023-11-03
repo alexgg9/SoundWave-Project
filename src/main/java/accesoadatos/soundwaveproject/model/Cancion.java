@@ -8,30 +8,30 @@ public class Cancion {
     private String nombre;
     private int duracion;
     private String genero;
-	private int id_disco;
-
 	private String url;
+	private Disco disco;
 
-    public Cancion(int id, String nombre, int duracion, String genero) {
-        this.id = id;
-        this.nombre = nombre;
-        this.duracion = duracion;
-        this.genero = genero;
-    }
 
+	public Cancion(int id, String nombre, int duracion, String genero, String url, Disco disco) {
+		this.id = id;
+		this.nombre = nombre;
+		this.duracion = duracion;
+		this.genero = genero;
+		this.url = url;
+		this.disco = disco;
+	}
 
 	public Cancion() {
 
 	}
 
-	public int getId_disco() {
-		return id_disco;
+	public Disco getDisco() {
+		return disco;
 	}
 
-	public void setId_disco(int id_disco) {
-		this.id_disco = id_disco;
+	public void setDisco(Disco disco) {
+		this.disco = disco;
 	}
-
 
 	public void setUrl(String url) {
 		this.url = url;
@@ -83,26 +83,23 @@ public class Cancion {
 
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cancion other = (Cancion) obj;
-		return Objects.equals(duracion, other.duracion) && Objects.equals(genero, other.genero) && id == other.id
-				&& Objects.equals(nombre, other.nombre);
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Cancion cancion = (Cancion) o;
+		return id == cancion.id;
 	}
 
-
-
-
 	@Override
-    public String toString() {
-        return "ID: " + id + ", Nombre: " + nombre + ", Duración: " + duracion + ", Género: " + genero;
-    }
-
-   
+	public String toString() {
+		return "Cancion{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", duracion=" + duracion +
+				", genero='" + genero + '\'' +
+				", url='" + url + '\'' +
+				", disco=" + disco +
+				'}';
+	}
 }
 
