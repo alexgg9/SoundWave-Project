@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaDAO extends Lista {
-    private final static String FINDALL = "SELECT * FROM lista";
+    private final static String FINDALL = "SELECT * FROM lista LIMIT 15";
     private final static String FINDBYID = "SELECT * FROM lista WHERE id = ?";
     private final static String INSERT = "INSERT INTO lista (nombre, descripcion, dni_usuario, suscripciones) VALUES (?, ?, ?, ?)";
     private final static String DELETE = "DELETE FROM lista WHERE id = ?";
@@ -39,7 +39,7 @@ public class ListaDAO extends Lista {
                 listas.add(lista);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Maneja las excepciones apropiadamente.
+            e.printStackTrace();
         }
 
         return listas;
@@ -53,20 +53,19 @@ public class ListaDAO extends Lista {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     String dniUsuario = rs.getString("dni_usuario");
-                    // Aquí puedes cargar el objeto Usuario usando UsuarioDAO o tu lógica de acceso a datos
                     Usuario usuario = UsuarioDAO.getByDni(dniUsuario);
                     suscripciones.add(usuario);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Maneja las excepciones apropiadamente.
+            e.printStackTrace();
         }
 
         return suscripciones;
     }
 
 
-    public Lista findById(int id) {
+    public static Lista findById(int id) {
         Lista lista = null;
 
         try (PreparedStatement statement = connection.prepareStatement(FINDBYID)) {

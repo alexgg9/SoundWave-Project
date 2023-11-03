@@ -1,5 +1,7 @@
 package accesoadatos.soundwaveproject.DAO;
 
+import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.Artista;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.Disco;
 
@@ -9,9 +11,9 @@ import java.util.List;
 
 public class DiscoDAO {
 
-    private final static String INSERT = "INSERT INTO disco (nombre, fechapublicacion, foto, reproducciones) VALUES (?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO disco (id, nombre, fecha_publicacion, foto, reproducciones, dni_artista) VALUES (?, ?, ?, ?, ?, ?)";
 
-    private final static String UPDATE = "UPDATE disco SET nombre = ?, fechapublicacion = ?, foto = ?, reproducciones = ? WHERE id = ?";;
+    private final static String UPDATE = "UPDATE disco SET id = ?, nombre = ?, fecha_publicacion = ?, foto = ?, reproducciones = ?, dni_artista=? WHERE id = ?";
 
     private final static String DELETE =  "DELETE FROM disco WHERE id = ?";
 
@@ -23,11 +25,11 @@ public class DiscoDAO {
 
     private Connection connection;
 
-    public DiscoDAO(Connection connection) {
-        this.connection = connection;
+    public DiscoDAO() {
+        this.connection= ConnectionMySQL.getConnect();
     }
 
-    public void insertDisco(Disco disco) throws SQLException {
+    public Disco insertDisco(Disco disco) throws SQLException {
 
         try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
             ps.setInt(1, disco.getId());
@@ -35,8 +37,10 @@ public class DiscoDAO {
             ps.setDate(3, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(4, disco.getFoto());
             ps.setString(5, disco.getReproducion());
+            ps.setString(6, disco.getArtista().getDni());
             ps.executeUpdate();
         }
+        return disco;
     }
 
     public void updateDisco(Disco disco) throws SQLException {
@@ -45,30 +49,34 @@ public class DiscoDAO {
             ps.setDate(2, Date.valueOf(disco.getFechaPublicacion()));
             ps.setBytes(3, disco.getFoto());
             ps.setString(4, disco.getReproducion());
-            ps.setInt(5, disco.getId());
+            ps.setString(5, disco.getArtista().getDni());
+            ps.setInt(6, disco.getId());
             ps.executeUpdate();
         }
     }
 
-    public void deleteDisco(String dni) throws SQLException {
+    public void deleteDisco(int id) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(DELETE)) {
-            ps.setString(1, dni);
+            ps.setInt(1, id);
             ps.executeUpdate();
         }
     }
 
-    public Disco getDiscoByDni(String dni) throws SQLException {
+    public Disco getDiscoByInt(int id) throws SQLException {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(SEARCHBYID)) {
-            preparedStatement.setString(1, dni);
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Disco disco = new Disco();
-                    disco.setId(resultSet.getInt("dni"));
+                    disco.setId(resultSet.getInt("id"));
                     disco.setNombre(resultSet.getString("nombre"));
                     disco.setFechaPublicacion(resultSet.getDate("fecha_publicacion").toLocalDate());
                     disco.setFoto(resultSet.getBytes("foto"));
                     disco.setReproducion(resultSet.getString("reproduccion"));
+                    ArtistaDAO artistaDao = new ArtistaDAO();
+                    Artista a1 = artistaDao.findByDni(resultSet.getString("dni_artista"));
+                    disco.setArtista(a1);
                     return disco;
                 }
             }

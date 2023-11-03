@@ -71,7 +71,7 @@ public class ComentarioDAO {
                     comentario.setContenido(res.getString("contenido"));
                     comentario.setFecha(res.getDate("fecha"));
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    comentario.setLista(findListById(res.getInt("id_lista")));
+                    comentario.setLista(findById(res.getInt("id_lista")).getLista());
 
                     result.add(comentario);
                 }
@@ -95,7 +95,7 @@ public class ComentarioDAO {
                     result.setContenido(res.getString("contenido"));
                     result.setFecha(res.getDate("fecha"));
                     result.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    result.setLista(findListById(res.getInt("id_lista")));
+                    result.setLista(findById(res.getInt("id_lista")).getLista());
 
                 }
             }
@@ -114,7 +114,7 @@ public class ComentarioDAO {
                     comentario.setContenido(res.getString("contenido"));
                     comentario.setFecha(res.getDate("fecha"));
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    comentario.setLista(findListById(res.getInt("id_lista")));
+                    comentario.setLista(findById(res.getInt("id_lista")).getLista());
                     comentarios.add(comentario);
                 }
             }
@@ -135,7 +135,7 @@ public class ComentarioDAO {
                     comentario.setContenido(res.getString("contenido"));
                     comentario.setFecha(res.getDate("fecha"));
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    comentario.setLista(findListById(res.getInt("id_lista")));
+                    comentario.setLista(findById(res.getInt("id_lista")).getLista());
                     comentarios.add(comentario);
                 }
             }

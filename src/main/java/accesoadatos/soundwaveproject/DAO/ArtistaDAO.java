@@ -15,7 +15,7 @@ public class ArtistaDAO {
     private final static String INSERT = "INSERT INTO Artista (dni, nombre, nacionalidad, foto) VALUES (?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE Artista SET nombre = ?, nacionalidad = ?, foto = ? WHERE dni = ?";
     private final static String SEARCHBYDNI = "SELECT dni, nombre, nacionalidad, foto FROM Artista WHERE dni = ?";
-    private final static String DELETE = "DELETE FROM Artista WHER dni = ?";
+    private final static String DELETE = "DELETE FROM Artista WHERE dni = ?";
     private final static String SEARCHDISC = "SELECT id, nombre, fecha_publicacion, foto FROM Disco WHERE dni_artista = ?";
 
 
@@ -38,7 +38,7 @@ public class ArtistaDAO {
                     result = new Artista();
                     result.setDni(res.getString("dni"));
                     result.setNombre(res.getString("nombre"));
-                    result.setNacionalidad(res.getString(res.getString("nacionalidad")));
+                    result.setNacionalidad(res.getString("nacionalidad"));
                     result.setFoto(res.getBytes("foto"));
 
                 }
