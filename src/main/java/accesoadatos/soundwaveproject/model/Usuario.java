@@ -17,6 +17,14 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String dni, String nombre, String correo, String contraseña, byte[] foto) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.foto = foto;
+    }
+
     public Usuario(String dni, String nombre, String correo, String contraseña, byte[] foto, List<Lista> misListas, List<Comentario> comentarios, List<Lista> suscripciones) {
         this.dni = dni;
         this.nombre = nombre;
