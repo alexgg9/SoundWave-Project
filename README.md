@@ -1,4 +1,4 @@
-     ![logo](https://github.com/alexgg9/SoundWave-Project/assets/44396199/97732cc6-a733-41f3-b30b-d4274ddae8c8)
+![logo](https://github.com/alexgg9/SoundWave-Project/assets/44396199/97732cc6-a733-41f3-b30b-d4274ddae8c8)
 
 
 # SOUNDWAVE
