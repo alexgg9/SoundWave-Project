@@ -1,4 +1,4 @@
-package accesoadatos.soundwaveproject.SQLConnection;
+package accesoadatos.soundwaveproject.model.SQLConnection;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

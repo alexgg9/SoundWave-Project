@@ -1,18 +1,15 @@
-package accesoadatos.soundwaveproject.DAO;
+package accesoadatos.soundwaveproject.model.DAO;
 
-import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Comentario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComentarioDAO {
 
-    private final static String INSERT = "INSERT INTO comentario (id, contenido, fecha, dni_usuario, id_lista) VALUES (?, ?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO comentario (contenido, fecha, dni_usuario, id_lista) VALUES (?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE comentario SET contenido = ?, fecha=?, dni_usuario=?, id_lista=? WHERE id=?";
     private final static String DELETE = "DELETE FROM comentario WHERE id = ?";
     private final static String SEARCHBYID = "SELECT id, contenido, fecha, dni_usuario,id_lista FROM comentario WHERE id = ?";
@@ -33,21 +30,18 @@ public class ComentarioDAO {
 
     public Comentario save(Comentario entity) throws SQLException {
         Comentario result = null;
-
         if (entity != null) {
             Comentario existingComment = findById(entity.getId());
-
             try (PreparedStatement pst = conn.prepareStatement(INSERT)) {
                 if (existingComment == null) {
-                    pst.setInt(1, entity.getId());
-                    pst.setString(2, entity.getContenido());
-                    pst.setDate(3, new java.sql.Date(entity.getFecha().getTime()));
-                    pst.setString(4, entity.getUsuario().getDni());
-                    pst.setInt(5, entity.getLista().getId());
+                    pst.setString(1, entity.getContenido());
+                    pst.setDate(2, Date.valueOf(entity.getFecha()));
+                    pst.setString(3, entity.getUsuario().getDni());
+                    pst.setInt(4, entity.getLista().getId());
                     pst.executeUpdate();
                 } else {
                     pst.setString(1, entity.getContenido());
-                    pst.setDate(2, new java.sql.Date(entity.getFecha().getTime()));
+                    pst.setDate(2, Date.valueOf(entity.getFecha()));
                     pst.setString(3, entity.getUsuario().getDni());
                     pst.setInt(4, entity.getLista().getId());
                     pst.setInt(5, entity.getId());
@@ -69,7 +63,7 @@ public class ComentarioDAO {
                     Comentario comentario = new Comentario();
                     comentario.setId(res.getInt("id"));
                     comentario.setContenido(res.getString("contenido"));
-                    comentario.setFecha(res.getDate("fecha"));
+                    comentario.setFecha(res.getDate("fecha").toLocalDate());
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
                     comentario.setLista(findById(res.getInt("id_lista")).getLista());
 
@@ -93,7 +87,7 @@ public class ComentarioDAO {
                     result = new Comentario();
                     result.setId(res.getInt("id"));
                     result.setContenido(res.getString("contenido"));
-                    result.setFecha(res.getDate("fecha"));
+                    result.setFecha(res.getDate("fecha").toLocalDate());
                     result.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
                     result.setLista(findById(res.getInt("id_lista")).getLista());
 
@@ -112,7 +106,7 @@ public class ComentarioDAO {
                     Comentario comentario = new Comentario();
                     comentario.setId(res.getInt("id"));
                     comentario.setContenido(res.getString("contenido"));
-                    comentario.setFecha(res.getDate("fecha"));
+                    comentario.setFecha(res.getDate("fecha").toLocalDate());
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
                     comentario.setLista(findById(res.getInt("id_lista")).getLista());
                     comentarios.add(comentario);
@@ -133,7 +127,7 @@ public class ComentarioDAO {
                     Comentario comentario = new Comentario();
                     comentario.setId(res.getInt("id"));
                     comentario.setContenido(res.getString("contenido"));
-                    comentario.setFecha(res.getDate("fecha"));
+                    comentario.setFecha(res.getDate("fecha").toLocalDate());
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
                     comentario.setLista(findById(res.getInt("id_lista")).getLista());
                     comentarios.add(comentario);

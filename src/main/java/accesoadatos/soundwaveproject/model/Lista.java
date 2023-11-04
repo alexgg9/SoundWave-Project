@@ -8,7 +8,7 @@ public class Lista {
     private int id;
     private String nombre;
     private String descripcion;
-    private List<Usuario> suscripciones;
+    private int suscripciones;
     private Usuario creador;
     private List<Comentario> comentarios;
 
@@ -16,7 +16,15 @@ public class Lista {
     public Lista() {
     }
 
-    public Lista(int id, String nombre, String descripcion, List<Usuario> suscripciones, Usuario creador, List<Comentario> comentarios, List<Usuario> seguidores) {
+    public Lista(int id,String nombre, String descripcion, int suscripciones, Usuario creador) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.suscripciones = suscripciones;
+        this.creador = creador;
+    }
+
+    public Lista(int id, String nombre, String descripcion, int suscripciones, Usuario creador, List<Comentario> comentarios, List<Usuario> seguidores) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -53,11 +61,11 @@ public class Lista {
         this.descripcion = descripcion;
     }
 
-    public List<Usuario> getSuscripciones() {
+    public int getSuscripciones() {
         return suscripciones;
     }
 
-    public void setSuscripciones(List<Usuario> suscripciones) {
+    public void setSuscripciones(int suscripciones) {
         this.suscripciones = suscripciones;
     }
 

@@ -1,6 +1,6 @@
-package accesoadatos.soundwaveproject.DAO;
+package accesoadatos.soundwaveproject.model.DAO;
 
-import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Artista;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.Disco;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class DiscoDAO {
 
-    private final static String INSERT = "INSERT INTO disco (id, nombre, fecha_publicacion, foto, reproduccion, dni_artista) VALUES (?, ?, ?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO disco (nombre, fecha_publicacion, foto, reproduccion, dni_artista) VALUES (?, ?, ?, ?, ?)";
 
-    private final static String UPDATE = "UPDATE disco SET id = ?, nombre = ?, fecha_publicacion = ?, foto = ?, reproduccion = ?, dni_artista=? WHERE id = ?";
+    private final static String UPDATE = "UPDATE disco SET  nombre = ?, fecha_publicacion = ?, foto = ?, reproduccion = ?, dni_artista=? WHERE id = ?";
 
     private final static String DELETE =  "DELETE FROM disco WHERE id = ?";
 
@@ -32,12 +32,11 @@ public class DiscoDAO {
     public Disco insertDisco(Disco disco) throws SQLException {
 
         try (PreparedStatement ps = connection.prepareStatement(INSERT)) {
-            ps.setInt(1, disco.getId());
-            ps.setString(2, disco.getNombre());
-            ps.setDate(3, Date.valueOf(disco.getFechaPublicacion()));
-            ps.setBytes(4, disco.getFoto());
-            ps.setString(5, disco.getReproduccion());
-            ps.setString(6, disco.getArtista().getDni());
+            ps.setString(1, disco.getNombre());
+            ps.setDate(2, Date.valueOf(disco.getFechaPublicacion()));
+            ps.setBytes(3, disco.getFoto());
+            ps.setString(4, disco.getReproduccion());
+            ps.setString(5, disco.getArtista().getDni());
             ps.executeUpdate();
         }
         return disco;

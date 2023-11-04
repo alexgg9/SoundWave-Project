@@ -1,12 +1,13 @@
 package accesoadatos.soundwaveproject.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 public class Comentario {
     private int id;
     private String contenido;
-    private Date fecha;
+    private LocalDate fecha;
     private Usuario usuario;
     private Lista lista;
 
@@ -19,13 +20,15 @@ public class Comentario {
 
     }
 
-    public Comentario(int id, String contenido, Date fecha, Usuario usuario, Lista lista) {
+    public Comentario(int id, String contenido, LocalDate fecha, Usuario usuario, Lista lista) {
         this.id = id;
         this.contenido = contenido;
         this.fecha = fecha;
         this.usuario = usuario;
         this.lista = lista;
     }
+
+
 
     public int getId() {
         return id;
@@ -43,11 +46,11 @@ public class Comentario {
         this.contenido = contenido;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

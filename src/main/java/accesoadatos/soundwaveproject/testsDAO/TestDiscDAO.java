@@ -1,8 +1,8 @@
 package accesoadatos.soundwaveproject.testsDAO;
 
-import accesoadatos.soundwaveproject.DAO.ArtistaDAO;
-import accesoadatos.soundwaveproject.DAO.DiscoDAO;
-import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.DAO.ArtistaDAO;
+import accesoadatos.soundwaveproject.model.DAO.DiscoDAO;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Artista;
 import accesoadatos.soundwaveproject.model.Disco;
 

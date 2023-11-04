@@ -1,4 +1,4 @@
-package accesoadatos.soundwaveproject.SQLConnection;
+package accesoadatos.soundwaveproject.model.SQLConnection;
 
 import java.io.File;
 import java.sql.Connection;

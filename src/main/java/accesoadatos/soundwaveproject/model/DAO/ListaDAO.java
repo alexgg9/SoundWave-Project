@@ -1,7 +1,7 @@
-package accesoadatos.soundwaveproject.DAO;
+package accesoadatos.soundwaveproject.model.DAO;
 
-import accesoadatos.soundwaveproject.model.Comentario;
 import accesoadatos.soundwaveproject.model.Lista;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Usuario;
 
 import java.sql.Connection;
@@ -20,8 +20,12 @@ public class ListaDAO extends Lista {
 
     private static Connection connection;
 
-    public ListaDAO(Connection connection) {
+    public ListaDAO(Connection connection){
         this.connection = connection;
+    }
+
+    public ListaDAO() {
+        connection = ConnectionMySQL.getConnect();
     }
 
     public List<Lista> findAll() {
@@ -35,7 +39,7 @@ public class ListaDAO extends Lista {
                 lista.setNombre(rs.getString("nombre"));
                 lista.setDescripcion(rs.getString("descripcion"));
                 lista.setCreador(UsuarioDAO.getByDni(rs.getString("dni_usuario")));
-                lista.setSuscripciones(getSuscripcionesByListaId(lista.getId()));
+                lista.setSuscripciones(rs.getInt("suscripciones"));
                 listas.add(lista);
             }
         } catch (SQLException e) {
@@ -76,10 +80,11 @@ public class ListaDAO extends Lista {
                     lista.setId(resultSet.getInt("id"));
                     lista.setNombre(resultSet.getString("nombre"));
                     lista.setDescripcion(resultSet.getString("descripcion"));
+                    lista.setNombre(resultSet.getString("suscripciones"));
                 }
             }
         } catch (SQLException e) {
-            // Maneja las excepciones apropiadamente.
+            e.printStackTrace();
         }
 
         return lista;
@@ -90,21 +95,18 @@ public class ListaDAO extends Lista {
             statement.setString(1, lista.getNombre());
             statement.setString(2, lista.getDescripcion());
             statement.setString(3, lista.getCreador().getDni());
-
+            statement.setInt(4, lista.getSuscripciones());
             int rowsAffected = statement.executeUpdate();
-
             return rowsAffected > 0;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public void deleteLista(int id) {
-        try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            // Maneja las excepciones apropiadamente.
+    public void deleteLista(int id) throws SQLException {
+        try (PreparedStatement pst = connection.prepareStatement(DELETE)) {
+            pst.setInt(1, id);
+            pst.executeUpdate();
         }
     }
 
@@ -112,9 +114,11 @@ public class ListaDAO extends Lista {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             statement.setString(1, lista.getNombre());
             statement.setString(2, lista.getDescripcion());
+            statement.setString(3, lista.getCreador().getDni());
+            statement.setInt(4, lista.getSuscripciones());
             statement.executeUpdate();
         } catch (SQLException e) {
-            // Maneja las excepciones apropiadamente.
+            e.printStackTrace();
         }
     }
 }

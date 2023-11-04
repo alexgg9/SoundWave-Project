@@ -1,6 +1,6 @@
-package accesoadatos.soundwaveproject.DAO;
+package accesoadatos.soundwaveproject.model.DAO;
 
-import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Comentario;
 import accesoadatos.soundwaveproject.model.Lista;
 import accesoadatos.soundwaveproject.model.Usuario;
@@ -21,13 +21,13 @@ public class UsuarioDAO extends Usuario {
 
     private static Connection connection;
 
-    public UsuarioDAO(Connection conn){
-        this.connection = conn;
+    public UsuarioDAO(Connection connection){
+        this.connection = connection;
+    }
+    public UsuarioDAO() {
+        connection = ConnectionMySQL.getConnect();
     }
 
-    public UsuarioDAO(){
-        this.connection= ConnectionMySQL.getConnect();
-    }
 
     public void save(Usuario usuario) throws SQLException {
         if (usuarioExists(usuario.getDni())) {
