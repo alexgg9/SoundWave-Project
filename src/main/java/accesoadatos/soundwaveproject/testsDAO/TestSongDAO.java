@@ -1,7 +1,7 @@
 package accesoadatos.soundwaveproject.testsDAO;
 
-import accesoadatos.soundwaveproject.DAO.CancionDAO;
-import accesoadatos.soundwaveproject.DAO.DiscoDAO;
+import accesoadatos.soundwaveproject.model.DAO.CancionDAO;
+import accesoadatos.soundwaveproject.model.DAO.DiscoDAO;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.Disco;
 

@@ -6,7 +6,7 @@ module SoundWaveProject {
     requires java.sql;
     requires java.xml.bind;
 
-    opens accesoadatos.soundwaveproject.SQLConnection to java.xml.bind;
+    opens accesoadatos.soundwaveproject.model.SQLConnection to java.xml.bind;
     exports accesoadatos.soundwaveproject;
     exports accesoadatos.soundwaveproject.testsDAO;
 }

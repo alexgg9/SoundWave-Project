@@ -1,6 +1,6 @@
-package accesoadatos.soundwaveproject.DAO;
+package accesoadatos.soundwaveproject.model.DAO;
 
-import accesoadatos.soundwaveproject.SQLConnection.ConnectionMySQL;
+import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.Disco;
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class CancionDAO {
 
-    private final static String INSERT = "INSERT INTO cancion (id, nombre, duracion, genero, url, id_disco) VALUES (?,?,?,?,?,?)";
+    private final static String INSERT = "INSERT INTO cancion (nombre, duracion, genero, url, id_disco) VALUES (?,?,?,?,?)";
 
     private final static String UPDATE = "UPDATE cancion SET nombre = ?, duracion = ?, genero = ?, url = ?, id_disco = ? WHERE id = ?";
 
@@ -38,12 +38,11 @@ public class CancionDAO {
             PreparedStatement pst;
             if (existingCancion == null) {
                 pst = connection.prepareStatement(INSERT);
-                pst.setInt(1, cancion.getId());
-                pst.setString(2, cancion.getNombre());
-                pst.setInt(3, cancion.getDuracion());
-                pst.setString(4, cancion.getGenero());
-                pst.setString(5, cancion.getUrl());
-                pst.setInt(6, cancion.getDisco().getId());
+                pst.setString(1, cancion.getNombre());
+                pst.setInt(2, cancion.getDuracion());
+                pst.setString(3, cancion.getGenero());
+                pst.setString(4, cancion.getUrl());
+                pst.setInt(5, cancion.getDisco().getId());
             } else {
                 pst = connection.prepareStatement(UPDATE);
                 pst.setString(1, cancion.getNombre());
