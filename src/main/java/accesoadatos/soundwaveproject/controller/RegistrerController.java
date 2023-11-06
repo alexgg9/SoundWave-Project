@@ -20,10 +20,10 @@ public class RegistrerController {
     private TextField txtDni;
 
     @FXML
-    private PasswordField txtMail;
+    private TextField txtMail;
 
     @FXML
-    private PasswordField txtName;
+    private TextField txtName;
 
     @FXML
     private PasswordField txtPassword;
