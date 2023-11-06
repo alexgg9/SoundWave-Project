@@ -15,15 +15,15 @@
          <image>
             <Image url="@../../img/Screenshot_1-removebg-preview.png" />
          </image></ImageView>
-      <Button layoutX="221.0" layoutY="373.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
+      <Button fx:id="btn_login" layoutX="221.0" layoutY="373.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Text layoutX="290.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olvidaste la contraseña?" />
-      <TextField layoutX="245.0" layoutY="265.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
-       <PasswordField layoutX="245.0" layoutY="328.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
+      <TextField fx:id="txt_mail" layoutX="245.0" layoutY="265.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
+       <PasswordField fx:id="txt_password" layoutX="245.0" layoutY="328.0" prefWidth="151.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
       <Text fill="#8bbbd9" layoutX="245.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
       <Text fill="#8bbbd9" layoutX="246.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
+      <Button fx:id="btn_login1" layoutX="343.0" layoutY="423.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="76.0" style="-fx-background-color: #185B8E; -fx-background-color: none;" text="Registrar" />
    </children>
 </AnchorPane>

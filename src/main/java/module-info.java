@@ -9,4 +9,5 @@ module SoundWaveProject {
     opens accesoadatos.soundwaveproject.model.SQLConnection to java.xml.bind;
     exports accesoadatos.soundwaveproject;
     exports accesoadatos.soundwaveproject.testsDAO;
+    exports accesoadatos.soundwaveproject.controller;
 }
