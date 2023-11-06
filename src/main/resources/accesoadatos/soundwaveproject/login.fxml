@@ -9,21 +9,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="278.0" fitWidth="375.0" layoutX="147.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+<AnchorPane prefHeight="480.0" prefWidth="680.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.LoginController">
+    <children>
+      <ImageView fitHeight="278.0" fitWidth="375.0" layoutX="168.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/Screenshot_1-removebg-preview.png" />
          </image></ImageView>
-      <Button fx:id="btn_login" layoutX="221.0" layoutY="373.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
+      <Button fx:id="btn_login" layoutX="244.0" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_mail" layoutX="245.0" layoutY="265.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
-       <PasswordField fx:id="txt_password" layoutX="245.0" layoutY="328.0" prefWidth="151.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
-      <Text fill="#8bbbd9" layoutX="245.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <Text fill="#8bbbd9" layoutX="246.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
-      <Button fx:id="btn_login1" layoutX="343.0" layoutY="423.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="76.0" style="-fx-background-color: #185B8E; -fx-background-color: none;" text="Registrar" />
+      <TextField fx:id="txt_mail" layoutX="267.0" layoutY="234.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
+       <PasswordField fx:id="txt_password" layoutX="267.0" layoutY="296.0" prefWidth="151.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
+      <Text fill="#8bbbd9" layoutX="267.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text fill="#8bbbd9" layoutX="267.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Button fx:id="btn_registrer" layoutX="366.0" layoutY="404.0" mnemonicParsing="false" onAction="#setButton" prefHeight="35.0" prefWidth="76.0" style="-fx-background-color: #185B8E; -fx-background-color: none;" text="Registrar" />
    </children>
 </AnchorPane>
