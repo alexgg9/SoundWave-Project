@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.HomeController">
    <children>
       <TextField layoutX="440.0" layoutY="20.0" prefHeight="24.0" prefWidth="144.0" promptText="Buscar..." />
       <AnchorPane layoutX="14.0" layoutY="84.0" prefHeight="313.0" prefWidth="48.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;">
          <children>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="25.0">
+            <ImageView fx:id="loadHomeView" fitHeight="47.0" fitWidth="48.0" layoutY="25.0">
                <image>
                   <Image url="@../../img/icons/home.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="173.0">
+            <ImageView fx:id="loadArtistsView" fitHeight="47.0" fitWidth="48.0" layoutY="173.0">
                <image>
                   <Image url="@../../img/icons/artist.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="102.0">
+            <ImageView fx:id="loadDiscsView" fitHeight="47.0" fitWidth="48.0" layoutY="102.0">
                <image>
                   <Image url="@../../img/icons/disc.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="27.0" layoutX="10.0" layoutY="245.0">
+            <ImageView fx:id="loadListsView" fitHeight="30.0" fitWidth="27.0" layoutX="10.0" layoutY="245.0">
                <image>
                   <Image url="@../../img/icons/list.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="602.0" layoutY="20.0">
+      <ImageView fx:id="btn_settings" fitHeight="24.0" fitWidth="24.0" layoutX="602.0" layoutY="20.0">
          <image>
             <Image url="@../../img/icons/settings.png" />
          </image>
       </ImageView>
-      <Circle fill="DODGERBLUE" layoutX="38.0" layoutY="32.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="loadProfileView" fill="DODGERBLUE" layoutX="38.0" layoutY="32.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="56.0" layoutY="24.0" text="Usuario" />
-      <ImageView fitHeight="24.0" fitWidth="27.0" layoutX="406.0" layoutY="20.0">
+      <ImageView fx:id="btn_search" fitHeight="24.0" fitWidth="27.0" layoutX="406.0" layoutY="20.0">
          <image>
             <Image url="@../../img/icons/search.png" />
          </image>
