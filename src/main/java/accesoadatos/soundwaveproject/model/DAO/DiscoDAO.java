@@ -20,6 +20,7 @@ public class DiscoDAO {
     private final static String SEARCHBYID = "SELECT * FROM disco WHERE id = ?";
 
     private final static String GETALL = "SELECT * FROM disco LIMIT 15";
+    private final static String SEARCHBYNAME = "SELECT nombre,fecha_publicacion,foto,reproduccion FROM disco WHERE nombre = ? ";
 
     private final static String GETALLCANCIONES = "SELECT id, nombre, duracion, genero, url FROM cancion WHERE id_disco = ?";
 
@@ -60,6 +61,27 @@ public class DiscoDAO {
             ps.executeUpdate();
         }
     }
+
+    public Disco getDiscoByNombre(String nombre) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SEARCHBYNAME)) {
+            preparedStatement.setString(1, nombre);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Disco disco = new Disco();
+                    disco.setNombre(resultSet.getString("nombre"));
+                    disco.setFechaPublicacion(resultSet.getDate("fecha_publicacion").toLocalDate());
+                    disco.setFoto(resultSet.getBytes("foto"));
+                    disco.setReproduccion(resultSet.getString("reproduccion"));
+                    ArtistaDAO artistaDao = new ArtistaDAO();
+                    Artista a1 = artistaDao.findByDni(resultSet.getString("dni_artista"));
+                    disco.setArtista(a1);
+                    return disco;
+                }
+            }
+        }
+        return null;
+    }
+
 
     public Disco getDiscoById(int id) throws SQLException {
 
