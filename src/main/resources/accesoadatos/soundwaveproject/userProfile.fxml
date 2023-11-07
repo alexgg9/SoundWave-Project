@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,7 +11,7 @@
 
 <AnchorPane prefHeight="423.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.UserProfile">
    <children>
-      <Label layoutX="120.0" layoutY="145.0" prefHeight="18.0" prefWidth="158.0" text="NOMBRE DEL USUARIO" />
+      <Label fx:id="nombreUsuario" layoutX="120.0" layoutY="145.0" prefHeight="18.0" prefWidth="158.0" text="NOMBRE DEL USUARIO" />
       <Label layoutX="103.0" layoutY="193.0" prefHeight="18.0" prefWidth="192.0" text="Discos que te gustan" />
       <GridPane layoutX="103.0" layoutY="225.0" prefHeight="158.0" prefWidth="430.0" style="-fx-background-color: #185B8E; -fx-background-radius: 20px;">
         <columnConstraints>
@@ -21,6 +22,11 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <ImageView fitHeight="139.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="139.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fitHeight="139.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+         </children>
       </GridPane>
       <Circle fill="DODGERBLUE" layoutX="131.0" layoutY="97.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
       <GridPane alignment="CENTER" layoutX="388.0" layoutY="61.0" prefHeight="128.0" prefWidth="120.0">
