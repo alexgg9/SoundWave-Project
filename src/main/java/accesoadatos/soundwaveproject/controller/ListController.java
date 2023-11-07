@@ -1,2 +1,3 @@
-package accesoadatos.soundwaveproject.controller;public class ListController {
+package accesoadatos.soundwaveproject.controller;
+public class ListController {
 }

@@ -19,7 +19,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Button fx:id="createAncout" layoutX="373.0" layoutY="388.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: #185B8E;" text="Crear cuenta" textFill="WHITE">
+      <Button fx:id="createAncout" layoutX="373.0" layoutY="388.0" mnemonicParsing="false" onAction="#create" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: #185B8E;" text="Crear cuenta" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

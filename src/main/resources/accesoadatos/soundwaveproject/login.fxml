@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -9,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="480.0" prefWidth="680.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.LoginController">
+<AnchorPane prefHeight="480.0" prefWidth="680.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.LoginController">
     <children>
       <ImageView fitHeight="278.0" fitWidth="375.0" layoutX="168.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/Screenshot_1-removebg-preview.png" />
          </image></ImageView>
-      <Button fx:id="btn_login" layoutX="244.0" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
+      <Button fx:id="btn_login" layoutX="244.0" layoutY="354.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #185B8E;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -31,5 +32,6 @@
             <Font size="14.0" />
          </font></Text>
       <Button fx:id="btn_registrer" layoutX="366.0" layoutY="404.0" mnemonicParsing="false" onAction="#setButton" prefHeight="35.0" prefWidth="76.0" style="-fx-background-color: #185B8E; -fx-background-color: none;" text="Registrar" />
+      <Label fx:id="labelUser" alignment="CENTER" layoutX="194.0" layoutY="439.0" prefHeight="17.0" prefWidth="308.0" />
    </children>
 </AnchorPane>
