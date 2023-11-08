@@ -17,6 +17,7 @@ public class ArtistaDAO {
     private final static String SEARCHBYDNI = "SELECT dni, nombre, nacionalidad, foto FROM Artista WHERE dni = ?";
     private final static String DELETE = "DELETE FROM Artista WHERE dni = ?";
     private final static String SEARCHDISC = "SELECT id, nombre, fecha_publicacion, foto FROM Disco WHERE dni_artista = ?";
+    private final static String SEARCHBYNOMBRE = "SELECT * FROM Artistas WHERE nombre = ?";
 
 
     private Connection conn;
@@ -46,6 +47,23 @@ public class ArtistaDAO {
         }
         return result;
     }
+    public Artista findByNombre(String nombre) throws SQLException {
+        Artista result = null;
+        try (PreparedStatement pst = this.conn.prepareStatement(SEARCHBYNOMBRE)) {
+            pst.setString(1, nombre);
+            try (ResultSet res = pst.executeQuery()) {
+                if (res.next()) {
+                    result = new Artista();
+                    result.setDni(res.getString("dni"));
+                    result.setNombre(res.getString("nombre"));
+                    result.setNacionalidad(res.getString("nacionalidad"));
+                    result.setFoto(res.getBytes("foto"));
+                }
+            }
+        }
+        return result;
+    }
+
 
     public List<Disco> getDiscosByArtista(Artista artista) throws SQLException {
         List<Disco> discos = new ArrayList<>();
