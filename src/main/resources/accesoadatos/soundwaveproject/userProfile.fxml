@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="423.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.UserProfileController">
+<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.UserProfileController">
    <children>
       <Label fx:id="nombreUsuario" alignment="CENTER" layoutX="222.0" layoutY="126.0" prefHeight="26.0" prefWidth="179.0" text="NOMBRE DEL USUARIO">
          <font>
