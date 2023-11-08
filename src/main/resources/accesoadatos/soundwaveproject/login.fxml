@@ -23,7 +23,7 @@
       </Button>
       <TextField fx:id="txt_mail" layoutX="267.0" layoutY="234.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
        <PasswordField fx:id="txt_password" layoutX="267.0" layoutY="296.0" prefWidth="151.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" />
-      <Text fill="#8bbbd9" layoutX="267.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <Text fill="#8bbbd9" layoutX="267.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
          <font>
             <Font size="14.0" />
          </font></Text>
