@@ -1,14 +1,23 @@
 package accesoadatos.soundwaveproject.controller;
 
 import accesoadatos.soundwaveproject.App;
+import accesoadatos.soundwaveproject.model.Artista;
+import accesoadatos.soundwaveproject.model.Disco;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeController {
 
@@ -30,26 +39,24 @@ public class HomeController {
     @FXML
     private GridPane popularArtistsGrid;
 
-    public void initialize() {
+    @FXML
+    private HBox fila;
+
+    public void initialize() throws IOException {
         // Aquí puedes agregar la lógica de inicialización de la vista.
         // Por ejemplo, cargar datos, configurar eventos, etc.
-        loadHomeView();
     }
 
     // Puedes agregar métodos para manejar eventos, acciones, etc.
     // Por ejemplo, para manejar la búsqueda cuando el usuario presiona Enter en el campo de búsqueda.
-    @FXML
-    private void handleSearchAction() {
-        String searchTerm = searchTextField.getText();
-        // Realiza la búsqueda y muestra los resultados.
-    }
 
     // Otros métodos relacionados con la interacción del usuario.
 
     @FXML
-    private void loadHomeView() {
+    private void loadHomeView() throws IOException {
         // Carga y muestra la vista 'Home' en el área de contenido principal.
         // Puedes cargar la vista utilizando FXMLLoader y establecerla en mainContentArea.
+        App.setRoot("home");
     }
 
     @FXML
@@ -75,5 +82,48 @@ public class HomeController {
         // Carga y muestra la vista de perfil en el área de contenido principal.
         App.setRoot("userProfile");
     }
+
+    @FXML
+    private void handleSearchAction() {
+        String searchTerm = searchTextField.getText();
+        // Realiza la búsqueda y muestra los resultados.
+
+        //cuando buscas
+        List<Object> listatotal = new ArrayList<>(); //lo que devuelve el buscado
+        for(Object item: listatotal){
+
+
+            if(item instanceof Disco){
+                Disco i = (Disco)item;
+                Image img = new Image(new ByteArrayInputStream(i.getFoto()));
+                ImageView imageView = new ImageView(img);
+                imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        //abrir disco this.openDisco(i.getId());
+                        event.consume();
+                    }
+                });
+                fila.getChildren().add(imageView);
+
+            }
+            if(item instanceof Artista){
+                Artista i = (Artista)item;
+                Image img = new Image(new ByteArrayInputStream(i.getFoto()));
+                ImageView imageView = new ImageView(img);
+                imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        //abrir disco this.openArtista(i.getId());
+                        event.consume();
+                    }
+                });
+                fila.getChildren().add(imageView);
+            }
+        }
+
+    }
+
+
 
 }
