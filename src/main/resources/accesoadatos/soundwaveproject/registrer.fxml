@@ -71,11 +71,11 @@
             <TextField fx:id="txtName" prefWidth="151.0" style="-fx-border-color: #8bbbd9; -fx-border-style: hidden hidden solid hidden; -fx-background-color: white;" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="51.0" style="-fx-background-color: #185B8E;" text="Back" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
       <Label fx:id="labelCreateUser" alignment="CENTER" layoutX="319.0" layoutY="438.0" prefHeight="17.0" prefWidth="302.0" />
+      <ImageView fx:id="arrowback" fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#back">
+         <image>
+            <Image url="@../../img/back.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
