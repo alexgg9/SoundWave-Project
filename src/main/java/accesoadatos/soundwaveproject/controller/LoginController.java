@@ -3,6 +3,7 @@ package accesoadatos.soundwaveproject.controller;
 import accesoadatos.soundwaveproject.App;
 import accesoadatos.soundwaveproject.model.DAO.UsuarioDAO;
 import accesoadatos.soundwaveproject.model.Usuario;
+import accesoadatos.soundwaveproject.model.singleton.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,6 +45,8 @@ public class LoginController {
 
         if (user != null && user.getContraseña().equals(contraseña)) {
             // Las credenciales son válidas, el usuario puede iniciar sesión
+            UserSession userSession = UserSession.getInstance();
+            userSession.loginUser(user);
             label.setText("Sesión iniciada correctamente");
             label.setTextFill(Color.GREEN);
 
