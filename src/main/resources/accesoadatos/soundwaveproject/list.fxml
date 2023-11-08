@@ -1,8 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
+<AnchorPane prefHeight="480.0" prefWidth="680.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.ListController">
 
-<AnchorPane prefHeight="480.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="$CONTROLLER_NAME$">
+    <ListView fx:id="userListView" layoutX="51.0" layoutY="29.0" prefHeight="415.0" prefWidth="412.0" style="-fx-background-color: #1f72a6;" />
+   <ImageView fx:id="arrowback" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#back">
+      <image>
+         <Image url="@../../img/back.png" />
+      </image>
+   </ImageView>
+   <GridPane layoutX="516.0" layoutY="162.0" prefHeight="150.0" prefWidth="113.0">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Button fx:id="btnAñadir" mnemonicParsing="false" onAction="#save" prefHeight="34.0" prefWidth="149.0" style="-fx-background-color: #185B8E;" text="Añadir" textFill="WHITE" GridPane.rowIndex="2">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrar" prefHeight="34.0" prefWidth="129.0" style="-fx-background-color: #185B8E;" text="Borrar" textFill="WHITE" GridPane.rowIndex="4">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+         <Button mnemonicParsing="false" style="-fx-background-color: #185B8E;" text="Ver canciones" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+      </children>
+   </GridPane>
+
 
 </AnchorPane>
