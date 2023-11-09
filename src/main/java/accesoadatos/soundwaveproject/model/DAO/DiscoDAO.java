@@ -4,8 +4,10 @@ import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Artista;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.Disco;
+import accesoadatos.soundwaveproject.model.Usuario;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class DiscoDAO {
 
     private final static String GETALLCANCIONES = "SELECT id, nombre, duracion, genero, url FROM cancion WHERE id_disco = ?";
 
-    private Connection connection;
+    private static Connection connection;
 
     public DiscoDAO() {
         this.connection= ConnectionMySQL.getConnect();
@@ -125,6 +127,30 @@ public class DiscoDAO {
         return canciones;
     }
 
+    public List<Disco> getAll() throws SQLException {
+        List<Disco> discos = new ArrayList<>();
 
+        try (PreparedStatement pst = connection.prepareStatement(GETALL)) {
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Disco disco = new Disco();
+                    disco.setId(rs.getInt("id"));
+                    disco.setNombre(rs.getString("nombre"));
+                    disco.setFechaPublicacion(rs.getDate("fecha_publicacion").toLocalDate());
+                    disco.setFoto(rs.getBytes("foto"));
+                    disco.setReproduccion(rs.getString("reproducciones"));
+
+                    // Utiliza métodos del DAO para obtener objetos relacionados
+                    ArtistaDAO artistaDAO = new ArtistaDAO();
+                    Artista artista = artistaDAO.findByDni(rs.getString("dni_artista"));
+                    disco.setArtista(artista);
+
+                    discos.add(disco);
+                }
+            }
+        }
+
+        return discos;
+    }
 }
 
