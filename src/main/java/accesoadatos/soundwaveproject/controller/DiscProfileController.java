@@ -1,9 +1,12 @@
 package accesoadatos.soundwaveproject.controller;
 
+import accesoadatos.soundwaveproject.App;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.DAO.DiscoDAO;
 import accesoadatos.soundwaveproject.model.Disco;
 import accesoadatos.soundwaveproject.utils.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,12 +15,16 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class DiscProfileController {
+
+    @FXML
+    private ImageView back;
     @FXML
     private ImageView portadaDisco;
     @FXML
@@ -33,13 +40,28 @@ public class DiscProfileController {
     @FXML
     private Label reproduccionesDisco;
 
-    public void initialize(URL url, ResourceBundle resourceBundle){
 
+
+    public void initialize(){
+        DiscoDAO discoDAO = new DiscoDAO();
+
+        try {
+            List<Disco> discos = discoDAO.getAll();
+            canciones.getItems().addAll((Cancion) discos);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Maneja la excepción de manera apropiada
+        }
     }
 
     @FXML
     public void btSearch() throws SQLException {
         searchDisco();
+    }
+
+    @FXML
+    public void back() throws IOException {
+        App.setRoot("home");
     }
 
     @FXML

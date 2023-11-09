@@ -4,6 +4,7 @@ import accesoadatos.soundwaveproject.App;
 import accesoadatos.soundwaveproject.model.DAO.UsuarioDAO;
 import accesoadatos.soundwaveproject.model.Usuario;
 import accesoadatos.soundwaveproject.model.singleton.UserSession;
+import accesoadatos.soundwaveproject.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,7 +44,7 @@ public class LoginController {
 
         Usuario user = userDAO.getByNombreUsuario(nombreUsuario);
 
-        if (user != null && user.getContraseña().equals(contraseña)) {
+        if (user != null && user.getContraseña().equals(Utils.encryptSHA256(contraseña))) {
             // Las credenciales son válidas, el usuario puede iniciar sesión
             UserSession userSession = UserSession.getInstance();
             userSession.loginUser(user);
@@ -51,7 +52,7 @@ public class LoginController {
             label.setTextFill(Color.GREEN);
 
             // Redirige al usuario a la siguiente pantalla
-            App.setRoot("registrer");
+            App.setRoot("home");
         } else {
             // Credenciales incorrectas, muestra un mensaje de error
             label.setText("Nombre de usuario o contraseña incorrectos");
