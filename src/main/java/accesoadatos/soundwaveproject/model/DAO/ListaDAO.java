@@ -17,6 +17,8 @@ public class ListaDAO extends Lista {
     private final static String INSERT = "INSERT INTO lista (nombre, descripcion, dni_usuario, suscripciones) VALUES (?, ?, ?, ?)";
     private final static String DELETE = "DELETE FROM lista WHERE id = ?";
     private final static String UPDATE = "UPDATE lista SET nombre = ?, descripcion = ?, dni_usuario = ?, suscripciones = ?";
+    private static final String SELECT_BY_USUARIO = "SELECT * FROM lista WHERE dni_usuario = ?";
+
 
     private static Connection connection;
 
@@ -46,6 +48,25 @@ public class ListaDAO extends Lista {
             e.printStackTrace();
         }
 
+        return listas;
+    }
+
+    public static List<Lista> getListasByUsuario(String usuarioDni) {
+        List<Lista> listas = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_BY_USUARIO)) {
+            ps.setString(1, usuarioDni);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Lista lista = new Lista();
+                    lista.setNombre(rs.getString("nombre"));
+                    lista.setDescripcion(rs.getString("descripcion"));
+                    lista.setSuscripciones(rs.getInt("suscripciones"));
+                    listas.add(lista);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return listas;
     }
 

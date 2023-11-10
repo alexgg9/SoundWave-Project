@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.UserProfileController">
+<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.UserProfileController">
    <children>
       <Label fx:id="nombreUsuario" alignment="CENTER" layoutX="272.0" layoutY="133.0" prefHeight="26.0" prefWidth="199.0" text="NOMBRE DEL USUARIO">
          <font>
             <Font size="16.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="340.0" layoutY="226.0" prefHeight="39.0" prefWidth="62.0" text="PlayList">
+      <Label alignment="CENTER" layoutX="340.0" layoutY="245.0" prefHeight="39.0" prefWidth="62.0" text="PlayList">
          <font>
             <Font size="16.0" />
          </font></Label>
@@ -29,6 +29,11 @@
             <Image url="@../../img/back.png" />
          </image>
       </ImageView>
-      <Button layoutX="303.0" layoutY="182.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;" text="Datos" textFill="WHITE" />
+      <Button layoutX="303.0" layoutY="207.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;" text="Datos" textFill="WHITE" />
+      <Label fx:id="correoUsuario" alignment="CENTER" layoutX="273.0" layoutY="159.0" prefHeight="26.0" prefWidth="199.0" text="CORREO DEL USUARIO">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
