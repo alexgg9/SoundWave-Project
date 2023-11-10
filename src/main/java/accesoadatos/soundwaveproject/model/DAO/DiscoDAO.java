@@ -22,7 +22,7 @@ public class DiscoDAO {
     private final static String SEARCHBYID = "SELECT * FROM disco WHERE id = ?";
 
     private final static String GETALL = "SELECT * FROM disco LIMIT 15";
-    private final static String SEARCHBYNAME = "SELECT nombre,fecha_publicacion,foto,reproduccion FROM disco WHERE nombre = ? ";
+    private final static String SEARCHBYNAME = "SELECT id,nombre,fecha_publicacion,foto,reproduccion,dni_artista FROM disco WHERE nombre = ? ";
 
     private final static String GETALLCANCIONES = "SELECT id, nombre, duracion, genero, url FROM cancion WHERE id_disco = ?";
 
@@ -70,6 +70,7 @@ public class DiscoDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Disco disco = new Disco();
+                    disco.setId(resultSet.getInt("id"));
                     disco.setNombre(resultSet.getString("nombre"));
                     disco.setFechaPublicacion(resultSet.getDate("fecha_publicacion").toLocalDate());
                     disco.setFoto(resultSet.getBytes("foto"));
@@ -77,12 +78,15 @@ public class DiscoDAO {
                     ArtistaDAO artistaDao = new ArtistaDAO();
                     Artista a1 = artistaDao.findByDni(resultSet.getString("dni_artista"));
                     disco.setArtista(a1);
+                    List<Cancion> canciones = getCancionesByDiscoId(disco.getId());
+                    disco.setCanciones(canciones);
                     return disco;
                 }
             }
         }
         return null;
     }
+
 
 
     public Disco getDiscoById(int id) throws SQLException {
@@ -108,7 +112,6 @@ public class DiscoDAO {
     }
     public List<Cancion> getCancionesByDiscoId(int discoId) throws SQLException {
         List<Cancion> canciones = new ArrayList<>();
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(GETALLCANCIONES)) {
             preparedStatement.setInt(1, discoId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -122,10 +125,13 @@ public class DiscoDAO {
                     canciones.add(cancion);
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return canciones;
     }
+
 
     public List<Disco> getAll() throws SQLException {
         List<Disco> discos = new ArrayList<>();
@@ -138,7 +144,7 @@ public class DiscoDAO {
                     disco.setNombre(rs.getString("nombre"));
                     disco.setFechaPublicacion(rs.getDate("fecha_publicacion").toLocalDate());
                     disco.setFoto(rs.getBytes("foto"));
-                    disco.setReproduccion(rs.getString("reproducciones"));
+                    disco.setReproduccion(rs.getString("reproduccion"));
 
                     // Utiliza métodos del DAO para obtener objetos relacionados
                     ArtistaDAO artistaDAO = new ArtistaDAO();

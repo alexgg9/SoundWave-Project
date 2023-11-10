@@ -104,7 +104,7 @@ public class Disco {
     @Override
     public String toString() {
         return "Disco{" +
-                "dni='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fechaPublicacion=" + fechaPublicacion +
                 ", foto=" + Arrays.toString(foto) +

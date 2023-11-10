@@ -1,9 +1,13 @@
 package accesoadatos.soundwaveproject.utils;
 
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +54,15 @@ public class Utils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static Image convertBytesToArray(byte[] byteArray) {
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray)) {
+            return new Image(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 
