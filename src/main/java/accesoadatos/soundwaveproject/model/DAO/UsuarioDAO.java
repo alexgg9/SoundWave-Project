@@ -105,10 +105,11 @@ public class UsuarioDAO extends Usuario {
                         rs.getString("correo"),
                         rs.getString("contraseña"),
                         rs.getBytes("foto"),
-                        new ArrayList<Lista>(),
-                        new ArrayList<Comentario>(),
-                        new ArrayList<Lista>()
+                        new ArrayList<>(),  // Inicializa misListas aquí
+                        new ArrayList<>(),
+                        new ArrayList<>()
                 );
+                usuario.setMisListas(ListaDAO.getListasByUsuario(usuario.getDni()));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
@@ -116,6 +117,29 @@ public class UsuarioDAO extends Usuario {
         }
         return usuarios;
     }
+
+
+    public Usuario getByCorreo(String correo) {
+        Usuario usuario = null;
+        try (PreparedStatement ps = connection.prepareStatement("SELECT dni, nombre, correo, contraseña, foto FROM usuario WHERE correo = ?")) {
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setDni(rs.getString("dni"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setContraseña(rs.getString("contraseña"));
+                    usuario.setFoto(rs.getBytes("foto"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+
     public Usuario getByNombreUsuario(String nombreUsuario) {
         try (PreparedStatement ps = connection.prepareStatement("SELECT dni, nombre, correo, contraseña, foto FROM usuario WHERE nombre = ?")) {
             ps.setString(1, nombreUsuario);

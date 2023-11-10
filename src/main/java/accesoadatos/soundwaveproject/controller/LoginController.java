@@ -37,28 +37,30 @@ public class LoginController {
 
     @FXML
     public void login() throws IOException {
-        UsuarioDAO userDAO = new UsuarioDAO();
-
-        String nombreUsuario = txt_mail.getText(); // El campo txt_mail ahora contiene el nombre de usuario
+        String correo = txt_mail.getText();
         String contraseña = txt_password.getText();
 
-        Usuario user = userDAO.getByNombreUsuario(nombreUsuario);
+        if (!Utils.isValidEmail(correo)) {
+            label.setText("Correo electrónico no válido");
+            label.setTextFill(Color.RED);
+            return;
+        }
+
+        UsuarioDAO userDAO = new UsuarioDAO();
+        Usuario user = userDAO.getByCorreo(correo);
 
         if (user != null && user.getContraseña().equals(Utils.encryptSHA256(contraseña))) {
-            // Las credenciales son válidas, el usuario puede iniciar sesión
             UserSession userSession = UserSession.getInstance();
             userSession.loginUser(user);
             label.setText("Sesión iniciada correctamente");
             label.setTextFill(Color.GREEN);
-
-            // Redirige al usuario a la siguiente pantalla
             App.setRoot("home");
         } else {
-            // Credenciales incorrectas, muestra un mensaje de error
             label.setText("Nombre de usuario o contraseña incorrectos");
             label.setTextFill(Color.RED);
         }
     }
+
 
 
 
