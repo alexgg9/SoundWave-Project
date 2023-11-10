@@ -13,18 +13,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class DiscProfileController {
 
-    @FXML
-    private ImageView back;
     @FXML
     private ImageView portadaDisco;
     @FXML
@@ -42,16 +42,10 @@ public class DiscProfileController {
 
 
 
-    public void initialize(){
-        DiscoDAO discoDAO = new DiscoDAO();
+    private DiscoDAO discoDAO;
 
-        try {
-            List<Disco> discos = discoDAO.getAll();
-            canciones.getItems().addAll((Cancion) discos);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Maneja la excepción de manera apropiada
-        }
+    public void initialize() {
+        discoDAO = new DiscoDAO();
     }
 
     @FXML
@@ -67,23 +61,22 @@ public class DiscProfileController {
     @FXML
     private void searchDisco() throws SQLException {
         String search = searchField.getText();
-        DiscoDAO discoDAO = new DiscoDAO();
         Disco disco = discoDAO.getDiscoByNombre(search);
 
-        if(disco != null){
-            nombreDisco.setText("Nombre:" + disco.getNombre());
-            artistaDisco.setText("Artista: "+ disco.getArtista());
-            fechaDisco.setText("Fecha Publicación:"+ disco.getFechaPublicacion());
-            reproduccionesDisco.setText("Reproducciones: "+ disco.getReproduccion());
+        if (disco != null && disco.getId() != 0) {
+            System.out.println("ID: " + disco.getId());
+            nombreDisco.setText("Nombre: " + disco.getNombre());
+            artistaDisco.setText("Artista: " + disco.getArtista().getNombre());
+            fechaDisco.setText("Fecha Publicación: " + disco.getFechaPublicacion());
+            reproduccionesDisco.setText("Reproducciones: " + disco.getReproduccion());
+            Image image = Utils.convertBytesToArray(disco.getFoto());
+            portadaDisco.setImage(image);
+
             List<Cancion> songs = discoDAO.getCancionesByDiscoId(disco.getId());
-
             canciones.getItems().clear();
-            canciones.getItems().addAll(songs);
-
-        }else {
-            Utils.showPopUp("Disco","Error","No se encontró en la base de datos", Alert.AlertType.ERROR);
+            canciones.getItems().setAll(songs);
+        } else {
+            Utils.showPopUp("Disco", "Error", "No se encontró en la base de datos", Alert.AlertType.ERROR);
         }
-
-
     }
 }

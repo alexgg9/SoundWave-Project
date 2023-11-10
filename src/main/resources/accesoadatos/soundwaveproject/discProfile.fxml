@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -11,18 +12,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.DiscProfileController">
+<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.DiscProfileController">
    <children>
-      <ImageView fitHeight="240.0" fitWidth="246.0" layoutX="24.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../img/DiscCovers/ToPimpAButterfly.jpg" />
-         </image>
-      </ImageView>
-      <ListView layoutX="307.0" layoutY="70.0" prefHeight="437.0" prefWidth="410.0" />
-      <GridPane layoutX="21.0" layoutY="328.0" prefHeight="152.0" prefWidth="246.0">
+      <ImageView fx:id="portadaDisco" fitHeight="240.0" fitWidth="246.0" layoutX="24.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+      <ListView fx:id="canciones" layoutX="307.0" layoutY="70.0" prefHeight="437.0" prefWidth="410.0" />
+      <TextField fx:id="searchField" layoutX="531.0" layoutY="19.0" promptText="Buscar disco..." />
+      <GridPane layoutX="20.0" layoutY="333.0" prefHeight="133.0" prefWidth="248.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.79998779296875" minWidth="10.0" prefWidth="128.79998779296875" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="71.20001220703125" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.79998779296875" minWidth="10.0" prefWidth="252.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -31,37 +28,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="nombreDisco" prefHeight="20.0" prefWidth="100.0">
+            <Label fx:id="nombreDisco" prefHeight="20.0" prefWidth="298.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="artistaDisco" prefHeight="20.0" prefWidth="96.0" GridPane.rowIndex="1">
+            <Label fx:id="artistaDisco" prefHeight="20.0" prefWidth="330.0" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="fechaDisco" prefHeight="20.0" prefWidth="98.0" GridPane.rowIndex="2">
+            <Label fx:id="fechaDisco" prefHeight="20.0" prefWidth="289.0" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="reproduccionesDisco" prefHeight="20.0" prefWidth="114.0" GridPane.rowIndex="3">
+            <Label fx:id="reproduccionesDisco" prefHeight="20.0" prefWidth="260.0" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </GridPane>
-      <ImageView fx:id="back" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#back">
-         <image>
-            <Image url="@../../img/back.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="searchField" layoutX="531.0" layoutY="19.0" promptText="Buscar disco..." />
-      <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="497.0" layoutY="19.0">
+      <Button layoutX="475.0" layoutY="14.0" mnemonicParsing="false" onAction="#btSearch" prefHeight="34.0" prefWidth="42.0" style="-fx-background-color: none;" />
+      <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="487.0" layoutY="18.0">
          <image>
             <Image url="@../../img/icons/search.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="101.0" layoutY="19.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: none;" />
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="26.0" layoutY="17.0" onMouseClicked="#back">
+         <image>
+            <Image url="@../../img/back.png" />
          </image>
       </ImageView>
    </children>
