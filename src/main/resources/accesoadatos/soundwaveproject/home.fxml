@@ -6,12 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="742.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.HomeController">
    <children>
-      <TextField alignment="CENTER_RIGHT" layoutX="480.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleSearchAction" prefHeight="24.0" prefWidth="102.0" promptText="Buscar..." />
+      <TextField alignment="CENTER_RIGHT" layoutX="471.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleSearchAction" prefHeight="24.0" prefWidth="202.0" promptText="¿Qué te apetece buscar?" />
       <AnchorPane layoutX="14.0" layoutY="84.0" prefHeight="313.0" prefWidth="48.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;">
          <children>
             <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="25.0" onMouseClicked="#loadHomeView">
@@ -36,14 +35,13 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fx:id="btn_settings" fitHeight="24.0" fitWidth="24.0" layoutX="602.0" layoutY="20.0">
+      <ImageView fx:id="btn_settings" fitHeight="24.0" fitWidth="24.0" layoutX="690.0" layoutY="20.0">
          <image>
             <Image url="@../../img/icons/settings.png" />
          </image>
       </ImageView>
-      <Circle fx:id="loadProfileView" fill="DODGERBLUE" layoutX="38.0" layoutY="32.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="56.0" layoutY="24.0" text="Usuario" />
-      <ImageView fx:id="btn_search" fitHeight="16.0" fitWidth="18.0" layoutX="486.0" layoutY="24.0">
+      <Label layoutX="62.0" layoutY="24.0" prefHeight="16.0" prefWidth="100.0" />
+      <ImageView fx:id="btn_search" fitHeight="16.0" fitWidth="18.0" layoutX="477.0" layoutY="24.0">
          <image>
             <Image url="@../../img/icons/search.png" />
          </image>
@@ -52,5 +50,10 @@
       <Text layoutX="110.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discos populares" />
       <HBox fx:id="fila" layoutX="106.0" layoutY="132.0" prefHeight="126.0" prefWidth="482.0" />
       <HBox fx:id="fila1" layoutX="110.0" layoutY="327.0" prefHeight="126.0" prefWidth="482.0" />
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="20.0" onMouseClicked="#loadProfileView">
+         <image>
+            <Image url="@../../img/icons/profile.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
