@@ -63,8 +63,7 @@ public class DiscProfileController {
         String search = searchField.getText();
         Disco disco = discoDAO.getDiscoByNombre(search);
 
-        if (disco != null && disco.getId() != 0) {
-            System.out.println("ID: " + disco.getId());
+        if (disco != null) {
             nombreDisco.setText("Nombre: " + disco.getNombre());
             artistaDisco.setText("Artista: " + disco.getArtista().getNombre());
             fechaDisco.setText("Fecha Publicación: " + disco.getFechaPublicacion());

@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistaDAO {
-    private final static String INSERT = "INSERT INTO Artista (dni, nombre, nacionalidad, foto) VALUES (?, ?, ?, ?)";
-    private final static String UPDATE = "UPDATE Artista SET nombre = ?, nacionalidad = ?, foto = ? WHERE dni = ?";
-    private final static String SEARCHBYDNI = "SELECT dni, nombre, nacionalidad, foto FROM Artista WHERE dni = ?";
-    private final static String DELETE = "DELETE FROM Artista WHERE dni = ?";
-    private final static String SEARCHDISC = "SELECT id, nombre, fecha_publicacion, foto FROM Disco WHERE dni_artista = ?";
-    private final static String SEARCHBYNOMBRE = "SELECT * FROM Artistas WHERE nombre = ?";
+    private final static String INSERT = "INSERT INTO artista (dni, nombre, nacionalidad, foto) VALUES (?, ?, ?, ?)";
+    private final static String UPDATE = "UPDATE artista SET nombre = ?, nacionalidad = ?, foto = ? WHERE dni = ?";
+    private final static String SEARCHBYDNI = "SELECT dni, nombre, nacionalidad, foto FROM artista WHERE dni = ?";
+    private final static String DELETE = "DELETE FROM artista WHERE dni = ?";
+    private final static String SEARCHDISC = "SELECT nombre, fecha_publicacion, reproduccion FROM disco WHERE dni_artista = ?";
+    private final static String SEARCHBYNOMBRE = "SELECT dni, nombre, nacionalidad, foto FROM artista WHERE nombre = ?";
 
 
     private Connection conn;
@@ -72,10 +72,9 @@ public class ArtistaDAO {
             try (ResultSet res = pst.executeQuery()) {
                 while (res.next()) {
                     Disco disco = new Disco();
-                    disco.setId(res.getInt("id"));
                     disco.setNombre(res.getString("nombre"));
                     disco.setFechaPublicacion(res.getDate("fecha_publicacion").toLocalDate());
-                    disco.setFoto(res.getBytes("foto"));
+                    disco.setReproduccion(res.getString("reproduccion"));
                     discos.add(disco);
                 }
             }
