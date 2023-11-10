@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -11,48 +12,47 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.ArtistaProfileController">
+<AnchorPane prefHeight="530.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.ArtistaProfileController">
    <children>
-      <ImageView fitHeight="240.0" fitWidth="246.0" layoutX="24.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../img/artistpics/neffex.jpg" />
-         </image>
-      </ImageView>
-      <ListView layoutX="305.0" layoutY="70.0" prefHeight="433.0" prefWidth="410.0" />
-      <GridPane layoutX="35.0" layoutY="356.0" prefHeight="92.0" prefWidth="218.0">
+      <ImageView fx:id="portadaArtista" fitHeight="240.0" fitWidth="246.0" layoutX="24.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+      <ListView fx:id="Discos" layoutX="322.0" layoutY="70.0" prefHeight="424.0" prefWidth="398.0" />
+      <TextField fx:id="searchField" layoutX="529.0" layoutY="19.0" promptText="Buscar disco..." />
+      <Button layoutX="24.0" layoutY="12.0" mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="60.0" style="-fx-background-color: none;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="33.0">
+               <image>
+                  <Image url="@../../img/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="482.0" layoutY="14.0" mnemonicParsing="false" onAction="#btSearch" style="-fx-background-color: none;">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="30.0">
+               <image>
+                  <Image url="@../../img/icons/search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <GridPane layoutX="14.0" layoutY="363.0" prefHeight="91.0" prefWidth="297.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.79998779296875" minWidth="10.0" prefWidth="128.79998779296875" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="71.20001220703125" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.59996337890624" minWidth="10.0" prefWidth="305.59996337890624" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="20.0" prefWidth="100.0" text="Nombre:">
+            <Label fx:id="nombreArtista" prefHeight="20.0" prefWidth="319.0">
                <font>
                   <Font size="14.0" />
-               </font>
-            </Label>
-            <Label prefHeight="20.0" prefWidth="97.0" text="Nacionalidad:" GridPane.rowIndex="1">
+               </font></Label>
+            <Label fx:id="nacionalidadArtista" prefHeight="20.0" prefWidth="311.0" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
-               </font>
-            </Label>
-            <Label prefHeight="18.0" prefWidth="73.0" GridPane.columnIndex="1" />
-            <Label prefHeight="18.0" prefWidth="77.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </font></Label>
          </children>
       </GridPane>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="17.0">
-         <image>
-            <Image url="@../../img/back.png" />
-         </image>
-      </ImageView>
-      <TextField layoutX="529.0" layoutY="19.0" promptText="Buscar disco..." />
-      <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="495.0" layoutY="19.0">
-         <image>
-            <Image url="@../../img/icons/search.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

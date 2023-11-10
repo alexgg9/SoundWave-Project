@@ -1,5 +1,6 @@
 package accesoadatos.soundwaveproject.controller;
 
+import accesoadatos.soundwaveproject.App;
 import accesoadatos.soundwaveproject.model.Cancion;
 import accesoadatos.soundwaveproject.model.DAO.ArtistaDAO;
 import accesoadatos.soundwaveproject.model.DAO.DiscoDAO;
@@ -11,8 +12,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,8 +34,9 @@ public class ArtistaProfileController {
     private Label dniArtista;
     @FXML
     private Label nacionalidadArtista;
-    public void initialize(URL url, ResourceBundle resourceBundle){
-
+    private ArtistaDAO artistaDAO;
+    public void initialize(){
+        artistaDAO = new ArtistaDAO();
     }
 
     @FXML
@@ -41,15 +45,20 @@ public class ArtistaProfileController {
     }
 
     @FXML
+    public void back() throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
     private void searchArtista() throws SQLException {
         String search = searchField.getText();
-        ArtistaDAO artistaDAO = new ArtistaDAO();
         Artista artista = artistaDAO.findByNombre(search);
 
         if(artista != null){
-            nombreArtista.setText("Nombre:" + artista.getNombre());
-            dniArtista.setText("DNI: "+ artista.getDni());
-            nacionalidadArtista.setText("Nacionalidad:"+ artista.getNacionalidad());
+            nombreArtista.setText("Nombre: " + artista.getNombre());
+            nacionalidadArtista.setText("Nacionalidad: "+ artista.getNacionalidad());
+            Image image = Utils.convertBytesToArray(artista.getFoto());
+            portadaArtista.setImage(image);
             List<Disco> Disc = artistaDAO.getDiscosByArtista(artista);
 
             Discos.getItems().clear();
