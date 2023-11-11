@@ -16,7 +16,14 @@ public class Lista {
     public Lista() {
     }
 
-    public Lista(int id,String nombre, String descripcion, int suscripciones, Usuario creador) {
+    public Lista(String nombre, String descripcion, int suscripciones, Usuario creador) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.suscripciones = suscripciones;
+        this.creador = creador;
+    }
+
+    public Lista(int id, String nombre, String descripcion, int suscripciones, Usuario creador) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
