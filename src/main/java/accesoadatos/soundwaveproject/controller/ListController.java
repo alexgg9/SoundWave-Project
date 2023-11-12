@@ -41,8 +41,6 @@ public class ListController {
     @FXML
     private TextField descripcionField;
     @FXML
-    private TextField suscripcionesField;
-    @FXML
     private ListView<Lista> userListView;
     @FXML
     private ListView<Cancion> songs;
@@ -152,37 +150,31 @@ public class ListController {
         try {
             return comentarioDAO.findCommentsByListaId(idLista);
         } catch (SQLException e) {
-            e.printStackTrace(); // Manejo de excepciones en caso de error
-            return new ArrayList<>(); // O manejar de otra manera el error, por ejemplo, lanzando una excepción
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
     @FXML
     public void agregarComentarioALista(ActionEvent event) {
         Lista listaSeleccionada = userListView.getSelectionModel().getSelectedItem();
-        Comentario comentarioSeleccionado = coments.getSelectionModel().getSelectedItem();
-        String nuevoComentarioTexto = comentarioField.getText(); // Obtener el texto del TextField
-
-        if (listaSeleccionada != null && comentarioSeleccionado != null && nuevoComentarioTexto != null && !nuevoComentarioTexto.isEmpty()) {
-            try {
-                // Crear un nuevo Comentario con el texto del TextField
-                Comentario nuevoComentario = new Comentario();
-                nuevoComentario.setContenido(nuevoComentarioTexto);
-
-                // Aquí puedes agregar el nuevo comentario a tu base de datos o hacer lo que necesites
-                ListaDAO listaDAO = new ListaDAO(/* tu conexión a la base de datos */);
-                listaDAO.insertarComentarioEnLista(listaSeleccionada.getId(), nuevoComentario.getId());
-
-                // Después de realizar la operación, puedes mostrar un mensaje informativo
-                Utils.showPopUp("Agregar Comentario", "", "Comentario añadido a la lista correctamente", Alert.AlertType.INFORMATION);
-            } catch (SQLException e) {
-                e.printStackTrace(); // Manejo de excepciones en caso de error
-                Utils.showPopUp("Error", "Error al agregar comentario", "Hubo un problema al agregar el comentario a la lista", Alert.AlertType.ERROR);
-            }
+        String nuevoComentarioTexto = comentarioField.getText();
+        if (listaSeleccionada != null && nuevoComentarioTexto != null && !nuevoComentarioTexto.isEmpty()) {
+            Usuario usuarioActual = UserSession.getInstance().getUsuarioActual();
+            Comentario nuevoComentario = new Comentario();
+            nuevoComentario.setContenido(nuevoComentarioTexto);
+            nuevoComentario.setUsuario(usuarioActual);
+            int idNuevoComentario = ListaDAO.insertarComentarioEnLista(listaSeleccionada.getId(), nuevoComentario);
+            List<Comentario> comentariosActualizados = getComentarioFromDataSource(idNuevoComentario);
+            ObservableList<Comentario> observableComentarios = FXCollections.observableArrayList(comentariosActualizados);
+            coments.setItems(observableComentarios);
+            Utils.showPopUp("Agregar Comentario", "", "Comentario añadido a la lista correctamente", Alert.AlertType.INFORMATION);
         } else {
-            Utils.showPopUp("Error", "Error al agregar comentario", "Selecciona una lista, un comentario y asegúrate de ingresar el texto del comentario", Alert.AlertType.WARNING);
+            Utils.showPopUp("Error", "Error al agregar comentario", "Selecciona una lista y asegúrate de ingresar el texto del comentario", Alert.AlertType.WARNING);
         }
     }
+
+
 
 
 

@@ -1,13 +1,12 @@
 package accesoadatos.soundwaveproject.model.DAO;
 
+import accesoadatos.soundwaveproject.model.Comentario;
 import accesoadatos.soundwaveproject.model.Lista;
 import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,6 @@ public class ListaDAO extends Lista {
     private static final String ADDSONGLIST = "INSERT INTO cancion_lista (id_lista, id_cancion) VALUES (?, ?)";
     private static final String ADDSUB = "INSERT INTO suscripcion (dni_usuario, id_lista) VALUES (?, ?)";
     private static final String NUMSUBS = "SELECT COUNT(*) FROM suscripcion WHERE dni_usuario = ? AND id_lista = ?";
-    private final static String INSERT_COMENTARIO_EN_LISTA = "INSERT INTO comentario_lista (id_lista, id_comentario) VALUES (?, ?)";
-
     private static Connection connection;
 
     public ListaDAO(Connection connection){
@@ -55,13 +52,6 @@ public class ListaDAO extends Lista {
     }
 
 
-    public void insertarComentarioEnLista(int idLista, int idComentario) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(INSERT_COMENTARIO_EN_LISTA)) {
-            ps.setInt(1, idLista);
-            ps.setInt(2, idComentario);
-            ps.executeUpdate();
-        }
-    }
     public static List<Lista> getListasByUsuario(String usuarioDni) {
         List<Lista> listas = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(SELECT_BY_USUARIO)) {
@@ -138,6 +128,31 @@ public class ListaDAO extends Lista {
 
         return lista;
     }
+
+    public static int insertarComentarioEnLista(int idLista, Comentario nuevoComentario) {
+        String INSERT_COMENTARIO = "INSERT INTO comentario (contenido, fecha, dni_usuario, id_lista) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_COMENTARIO, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, nuevoComentario.getContenido());
+            statement.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+            statement.setString(3, nuevoComentario.getUsuario().getDni());
+            statement.setInt(4, idLista);
+
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+            }
+            return -1;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
 
     public boolean insertLista(Lista lista) {
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
