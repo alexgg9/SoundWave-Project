@@ -94,14 +94,13 @@ public class Cancion {
 
 	@Override
 	public String toString() {
-		return "Cancion{" +
-				"id=" + id +
-				", nombre='" + nombre + '\'' +
-				", duracion=" + Utils.duracionToString(duracion) +
-				", genero='" + genero + '\'' +
-				", url='" + url + '\'' +
-				", disco=" + disco +
-				'}';
+		return "Cancion - " +
+				"id:" + id +
+				", nombre:'" + nombre + '\'' +
+				", duracion:" + Utils.duracionToString(duracion) +
+				", genero:'" + genero + '\'' +
+				", url:'" + url + '\'' +
+				", disco:" + disco.getNombre();
 	}
 }
 
