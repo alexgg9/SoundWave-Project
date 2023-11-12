@@ -2,7 +2,9 @@ package  accesoadatos.soundwaveproject.controller;
 
 import accesoadatos.soundwaveproject.App;
 import accesoadatos.soundwaveproject.model.Cancion;
+import accesoadatos.soundwaveproject.model.Comentario;
 import accesoadatos.soundwaveproject.model.DAO.CancionDAO;
+import accesoadatos.soundwaveproject.model.DAO.ComentarioDAO;
 import accesoadatos.soundwaveproject.model.DAO.ListaDAO;
 import accesoadatos.soundwaveproject.model.Lista;
 import accesoadatos.soundwaveproject.model.Usuario;
@@ -19,11 +21,17 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListController {
     @FXML
     private Button btnAñadir;
+    @FXML
+    private Button btnAñadirComentario;
+    @FXML
+    private TextField comentarioField;
+
 
     @FXML
     private Button btnBorrar;
@@ -38,6 +46,8 @@ public class ListController {
     private ListView<Lista> userListView;
     @FXML
     private ListView<Cancion> songs;
+    @FXML
+    private ListView<Comentario> coments;
 
 
     @FXML
@@ -137,4 +147,43 @@ public class ListController {
         CancionDAO cancionDAO = new CancionDAO();
         return cancionDAO.getAllCanciones();
     }
+    private List<Comentario> getComentarioFromDataSource(int idLista) {
+        ComentarioDAO comentarioDAO = new ComentarioDAO();
+        try {
+            return comentarioDAO.findCommentsByListaId(idLista);
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejo de excepciones en caso de error
+            return new ArrayList<>(); // O manejar de otra manera el error, por ejemplo, lanzando una excepción
+        }
+    }
+
+    @FXML
+    public void agregarComentarioALista(ActionEvent event) {
+        Lista listaSeleccionada = userListView.getSelectionModel().getSelectedItem();
+        Comentario comentarioSeleccionado = coments.getSelectionModel().getSelectedItem();
+        String nuevoComentarioTexto = comentarioField.getText(); // Obtener el texto del TextField
+
+        if (listaSeleccionada != null && comentarioSeleccionado != null && nuevoComentarioTexto != null && !nuevoComentarioTexto.isEmpty()) {
+            try {
+                // Crear un nuevo Comentario con el texto del TextField
+                Comentario nuevoComentario = new Comentario();
+                nuevoComentario.setContenido(nuevoComentarioTexto);
+
+                // Aquí puedes agregar el nuevo comentario a tu base de datos o hacer lo que necesites
+                ListaDAO listaDAO = new ListaDAO(/* tu conexión a la base de datos */);
+                listaDAO.insertarComentarioEnLista(listaSeleccionada.getId(), nuevoComentario.getId());
+
+                // Después de realizar la operación, puedes mostrar un mensaje informativo
+                Utils.showPopUp("Agregar Comentario", "", "Comentario añadido a la lista correctamente", Alert.AlertType.INFORMATION);
+            } catch (SQLException e) {
+                e.printStackTrace(); // Manejo de excepciones en caso de error
+                Utils.showPopUp("Error", "Error al agregar comentario", "Hubo un problema al agregar el comentario a la lista", Alert.AlertType.ERROR);
+            }
+        } else {
+            Utils.showPopUp("Error", "Error al agregar comentario", "Selecciona una lista, un comentario y asegúrate de ingresar el texto del comentario", Alert.AlertType.WARNING);
+        }
+    }
+
+
+
 }

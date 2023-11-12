@@ -21,7 +21,7 @@ public class ListaDAO extends Lista {
     private static final String ADDSONGLIST = "INSERT INTO cancion_lista (id_lista, id_cancion) VALUES (?, ?)";
     private static final String ADDSUB = "INSERT INTO suscripcion (dni_usuario, id_lista) VALUES (?, ?)";
     private static final String NUMSUBS = "SELECT COUNT(*) FROM suscripcion WHERE dni_usuario = ? AND id_lista = ?";
-
+    private final static String INSERT_COMENTARIO_EN_LISTA = "INSERT INTO comentario_lista (id_lista, id_comentario) VALUES (?, ?)";
 
     private static Connection connection;
 
@@ -54,6 +54,14 @@ public class ListaDAO extends Lista {
         return listas;
     }
 
+
+    public void insertarComentarioEnLista(int idLista, int idComentario) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(INSERT_COMENTARIO_EN_LISTA)) {
+            ps.setInt(1, idLista);
+            ps.setInt(2, idComentario);
+            ps.executeUpdate();
+        }
+    }
     public static List<Lista> getListasByUsuario(String usuarioDni) {
         List<Lista> listas = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(SELECT_BY_USUARIO)) {

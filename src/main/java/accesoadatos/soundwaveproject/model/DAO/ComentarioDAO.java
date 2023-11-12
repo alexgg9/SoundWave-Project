@@ -16,6 +16,7 @@ public class ComentarioDAO {
     private final static String SEARCHALL = "SELECT * FROM comentario LIMIT 15";
     private final static String SEARCHBYUSER = "SELECT id, contenido, fecha, dni_usuario,id_lista FROM comentario WHERE dni_usuario = ?";
     private final static String SEARCHBYIDLIST = "SELECT id, contenido, fecha, dni_usuario,id_lista FROM comentario WHERE id_lista = ?";
+    private final static String SEARCH_BY_LISTA_ID = "SELECT id, contenido, fecha, dni_usuario, id_lista FROM comentario WHERE id_lista = ?";
 
 
     private Connection conn;
@@ -96,6 +97,29 @@ public class ComentarioDAO {
         }
         return result;
     }
+
+    public List<Comentario> findCommentsByListaId(int idLista) throws SQLException {
+        List<Comentario> result = new ArrayList<>();
+        try (PreparedStatement pst = this.conn.prepareStatement(SEARCH_BY_LISTA_ID)) {
+            pst.setInt(1, idLista);  // Agregamos el parámetro id_lista a la consulta
+            try (ResultSet res = pst.executeQuery()) {
+                while (res.next()) {
+                    Comentario comentario = new Comentario();
+                    comentario.setId(res.getInt("id"));
+                    comentario.setContenido(res.getString("contenido"));
+                    comentario.setFecha(res.getDate("fecha").toLocalDate());
+                    comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
+                    comentario.setLista(findById(res.getInt("id_lista")).getLista());
+
+                    result.add(comentario);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejo de excepciones en caso de error
+        }
+        return result;
+    }
+
 
     public List<Comentario> findAllByUser(String dniUsuario) throws SQLException {
         List<Comentario> comentarios = new ArrayList<>();
