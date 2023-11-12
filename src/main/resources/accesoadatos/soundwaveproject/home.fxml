@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,28 +12,44 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="742.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.HomeController">
    <children>
       <TextField alignment="CENTER_RIGHT" layoutX="471.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleSearchAction" prefHeight="24.0" prefWidth="202.0" promptText="¿Qué te apetece buscar?" />
-      <AnchorPane layoutX="14.0" layoutY="84.0" prefHeight="313.0" prefWidth="48.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;">
+      <AnchorPane layoutX="21.0" layoutY="109.0" prefHeight="313.0" prefWidth="59.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;">
          <children>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="25.0" onMouseClicked="#loadHomeView">
-               <image>
-                  <Image url="@../../img/icons/home.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="173.0" onMouseClicked="#loadArtistsView">
-               <image>
-                  <Image url="@../../img/icons/artist.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="47.0" fitWidth="48.0" layoutY="102.0" onMouseClicked="#loadDiscsView">
-               <image>
-                  <Image url="@../../img/icons/disc.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="27.0" layoutX="10.0" layoutY="245.0" onMouseClicked="#loadListsView">
-               <image>
-                  <Image url="@../../img/icons/list.png" />
-               </image>
-            </ImageView>
+            <Button layoutX="4.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadHomeView" prefHeight="55.0" prefWidth="52.0" style="-fx-background-color: #185B8E;">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="31.0">
+                     <image>
+                        <Image url="@../../img/icons/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="4.0" layoutY="90.0" mnemonicParsing="false" onAction="#loadDiscsView" prefHeight="55.0" prefWidth="45.0" style="-fx-background-color: #185B8E;">
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="34.0">
+                     <image>
+                        <Image url="@../../img/icons/disc.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="4.0" layoutY="167.0" mnemonicParsing="false" onAction="#loadArtistsView" prefWidth="45.0" style="-fx-background-color: #185B8E;">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="34.0">
+                     <image>
+                        <Image url="@../../img/icons/artist.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="246.0" mnemonicParsing="false" onAction="#loadListsView" style="-fx-background-color: #185B8E;">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="23.0">
+                     <image>
+                        <Image url="@../../img/icons/list.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <ImageView fx:id="btn_settings" fitHeight="24.0" fitWidth="24.0" layoutX="690.0" layoutY="20.0">
@@ -50,10 +67,13 @@
       <Text layoutX="110.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discos populares" />
       <HBox fx:id="fila" layoutX="106.0" layoutY="132.0" prefHeight="126.0" prefWidth="482.0" />
       <HBox fx:id="fila1" layoutX="110.0" layoutY="327.0" prefHeight="126.0" prefWidth="482.0" />
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="20.0" onMouseClicked="#loadProfileView">
-         <image>
-            <Image url="@../../img/icons/profile.png" />
-         </image>
-      </ImageView>
+      <Button layoutX="30.0" layoutY="16.0" mnemonicParsing="false" onAction="#loadProfileView" style="-fx-background-color: none;">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../../img/icons/profile.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>
