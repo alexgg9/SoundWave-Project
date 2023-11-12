@@ -3,12 +3,12 @@
 
 # SOUNDWAVE
 
-SoundWave es una aplicación de servicio de música digital que te permite escuchar y disfrutar de tu colección de música de una manera fácil y eficiente. Esta aplicación está diseñada para ayudarte a administrar tus artistas, discos y canciones favoritas de una manera intuitiva.
+SoundWave es una aplicación de servicio de música digital que te permite escuchar y disfrutar de tu colección de música de una manera fácil y eficiente. Esta aplicación está diseñada para ayudarte a administrar tus listas de reproducción personalizadas de una manera intuitiva.
 
 ## Features
 
-- Catálogo de discos: Organiza y explora tu colección de discos, incluyendo carátulas e información detallada.
-- Lista de canciones: Lleva un registro de tus canciones, con detalles como título, duración y álbum asociado.
+- Catálogo de discos: Explora la colección de discos de nuestro aplicación, que incluyendo carátulas e información detallada.
+- Lista de canciones: Lleva un registro de tus canciones, con detalles como título y álbum asociado.
 - Reproducción de música: Reproduce tus canciones directamente desde la aplicación.
 - Búsqueda avanzada: Encuentra rápidamente artistas, discos o canciones en tu colección.
 
