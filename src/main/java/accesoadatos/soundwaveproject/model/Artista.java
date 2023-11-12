@@ -71,7 +71,6 @@ public class Artista {
                 "dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", nacionalidad='" + nacionalidad + '\'' +
-                ", foto=" + Arrays.toString(foto) +
                 ", discos=" + discos +
                 '}';
     }

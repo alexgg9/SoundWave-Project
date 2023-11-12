@@ -18,6 +18,9 @@ public class ListaDAO extends Lista {
     private final static String DELETE = "DELETE FROM lista WHERE id = ?";
     private final static String UPDATE = "UPDATE lista SET nombre = ?, descripcion = ?, dni_usuario = ?, suscripciones = ?";
     private static final String SELECT_BY_USUARIO = "SELECT * FROM lista WHERE dni_usuario = ?";
+    private static final String ADDSONGLIST = "INSERT INTO cancion_lista (id_lista, id_cancion) VALUES (?, ?)";
+    private static final String ADDSUB = "INSERT INTO suscripcion (dni_usuario, id_lista) VALUES (?, ?)";
+    private static final String NUMSUBS = "SELECT COUNT(*) FROM suscripcion WHERE dni_usuario = ? AND id_lista = ?";
 
 
     private static Connection connection;
@@ -70,6 +73,9 @@ public class ListaDAO extends Lista {
         return listas;
     }
 
+
+
+
     private List<Usuario> getSuscripcionesByListaId(int listaId) {
         List<Usuario> suscripciones = new ArrayList<>();
 
@@ -89,6 +95,20 @@ public class ListaDAO extends Lista {
         return suscripciones;
     }
 
+    public static int getNumeroSuscriptores(String dniUsuario, int idLista) {
+        try (PreparedStatement statement = connection.prepareStatement(NUMSUBS)) {
+            statement.setString(1, dniUsuario);
+            statement.setInt(2, idLista);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return 0;
+    }
 
     public static Lista findById(int id) {
         Lista lista = null;
@@ -130,6 +150,30 @@ public class ListaDAO extends Lista {
             pst.executeUpdate();
         }
     }
+
+    public static boolean agregarCancionALista(int idLista, int idCancion) {
+        try (PreparedStatement statement = connection.prepareStatement(ADDSONGLIST)) {
+            statement.setInt(1, idLista);
+            statement.setInt(2, idCancion);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static boolean suscribirse(String dni, int id){
+        try (PreparedStatement statement = connection.prepareStatement(ADDSUB)) {
+            statement.setString(1, dni);
+            statement.setInt(2, id);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
 
     public void updateLista(Lista lista) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {

@@ -121,7 +121,6 @@ public class Usuario {
                 ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
                 ", contraseña='" + contraseña + '\'' +
-                ", foto=" + Arrays.toString(foto) +
                 ", misListas=" + misListas +
                 ", comentarios=" + comentarios +
                 ", suscripciones=" + suscripciones +
