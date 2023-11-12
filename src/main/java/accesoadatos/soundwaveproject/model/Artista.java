@@ -67,11 +67,10 @@ public class Artista {
 
     @Override
     public String toString() {
-        return "Artista{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", nacionalidad='" + nacionalidad + '\'' +
-                ", discos=" + discos +
-                '}';
+        return "Artista - " +
+                "dni: '" + dni + '\'' +
+                ", nombre: '" + nombre + '\'' +
+                ", nacionalidad: '" + nacionalidad + '\'' +
+                ", discos: " + discos;
     }
 }
