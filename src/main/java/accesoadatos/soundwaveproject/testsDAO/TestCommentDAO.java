@@ -32,6 +32,6 @@ public class TestCommentDAO {
         //listaDAO.insertLista(lista);
         Comentario comentario = new Comentario(3, "Muy guapa la lista", LocalDate.of(2022, 10, 15), usuario, lista);
         //comentarioDAO.save(comentario);
-        comentarioDAO.delete(comentario);
+
     }
 }

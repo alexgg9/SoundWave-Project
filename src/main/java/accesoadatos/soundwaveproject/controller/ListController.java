@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,7 +32,8 @@ public class ListController {
     private Button btnAñadirComentario;
     @FXML
     private TextField comentarioField;
-
+    @FXML
+    private Button btnBorrarComentario;
 
     @FXML
     private Button btnBorrar;
@@ -118,6 +120,17 @@ public class ListController {
         List<Cancion> canciones = getCancionesFromDataSource();
         ObservableList<Cancion> observableCanciones = FXCollections.observableArrayList(canciones);
         songs.setItems(observableCanciones);
+        userListView.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                Lista selectedLista = userListView.getSelectionModel().getSelectedItem();
+                if (selectedLista != null) {
+                    int idLista = selectedLista.getId();
+                    List<Comentario> comentarios = getComentarioFromDataSource(idLista);
+                    coments.setItems(FXCollections.observableArrayList(comentarios));
+                }
+            }
+        });
+
     }
 
     private void actualizarListas() {
@@ -145,6 +158,25 @@ public class ListController {
         CancionDAO cancionDAO = new CancionDAO();
         return cancionDAO.getAllCanciones();
     }
+    @FXML
+    void eliminarComentarioSeleccionado(ActionEvent event) {
+        Comentario comentarioSeleccionado = coments.getSelectionModel().getSelectedItem();
+
+        if (comentarioSeleccionado != null) {
+            int idComentario = comentarioSeleccionado.getId();
+            ComentarioDAO comentarioDAO = new ComentarioDAO();
+
+            comentarioDAO.delete(idComentario);
+
+            coments.getItems().remove(comentarioSeleccionado);
+
+            Utils.showPopUp("Borrar Comentario", "", "Comentario eliminado correctamente", Alert.AlertType.INFORMATION);
+        } else {
+            Utils.showPopUp("Error", "Error al borrar comentario", "Selecciona un comentario para borrar", Alert.AlertType.WARNING);
+        }
+    }
+
+
     private List<Comentario> getComentarioFromDataSource(int idLista) {
         ComentarioDAO comentarioDAO = new ComentarioDAO();
         try {

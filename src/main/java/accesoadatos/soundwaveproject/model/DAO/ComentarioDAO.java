@@ -1,5 +1,6 @@
 package accesoadatos.soundwaveproject.model.DAO;
 
+import accesoadatos.soundwaveproject.model.Lista;
 import accesoadatos.soundwaveproject.model.SQLConnection.ConnectionMySQL;
 import accesoadatos.soundwaveproject.model.Comentario;
 
@@ -90,18 +91,29 @@ public class ComentarioDAO {
                     result.setContenido(res.getString("contenido"));
                     result.setFecha(res.getDate("fecha").toLocalDate());
                     result.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    result.setLista(findById(res.getInt("id_lista")).getLista());
 
+                    // Obtener la Lista directamente desde la base de datos si es necesario
+                    int idLista = res.getInt("id_lista");
+                    Lista lista = ListaDAO.findById(idLista);
+
+                    // Establecer la Lista en el Comentario
+                    result.setLista(lista);
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejo de excepciones en caso de error
         }
         return result;
     }
+
+
 
     public List<Comentario> findCommentsByListaId(int idLista) throws SQLException {
         List<Comentario> result = new ArrayList<>();
         try (PreparedStatement pst = this.conn.prepareStatement(SEARCH_BY_LISTA_ID)) {
             pst.setInt(1, idLista);  // Agregamos el parámetro id_lista a la consulta
+            Lista lista = ListaDAO.findById(idLista);  // Obtener la lista fuera del bucle
+
             try (ResultSet res = pst.executeQuery()) {
                 while (res.next()) {
                     Comentario comentario = new Comentario();
@@ -109,7 +121,7 @@ public class ComentarioDAO {
                     comentario.setContenido(res.getString("contenido"));
                     comentario.setFecha(res.getDate("fecha").toLocalDate());
                     comentario.setUsuario(UsuarioDAO.getByDni(res.getString("dni_usuario")));
-                    comentario.setLista(findById(res.getInt("id_lista")).getLista());
+                    comentario.setLista(lista);  // Establecer la misma lista para todos los comentarios
 
                     result.add(comentario);
                 }
@@ -165,16 +177,22 @@ public class ComentarioDAO {
 
 
 
-    public void delete(Comentario entity) throws SQLException {
-        if (entity != null) {
-            try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
-                pst.setInt(1, entity.getId());
-                pst.executeUpdate();
-            }
+
+
+
+    public void delete(int idComentario) {
+
+        try (PreparedStatement pst = this.conn.prepareStatement(DELETE)) {
+            pst.setInt(1, idComentario);
+            pst.executeUpdate();
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejo de excepciones en caso de error al eliminar el comentario
         }
     }
-
-
-
 
 }
