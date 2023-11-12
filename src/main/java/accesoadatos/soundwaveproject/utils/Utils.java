@@ -29,6 +29,13 @@ public class Utils {
     }
 
 
+    public static String duracionToString(long duracion) {
+        long minutos = duracion / 60;
+        long segundos = duracion % 60;
+        String segundosStr = segundos < 10 ? "0" + segundos : String.valueOf(segundos);
+        return String.format("%d:%s", minutos, segundosStr);
+    }
+
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(emailRegex);

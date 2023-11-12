@@ -1,5 +1,7 @@
 package accesoadatos.soundwaveproject.model;
 
+import accesoadatos.soundwaveproject.utils.Utils;
+
 import java.sql.Time;
 import java.util.Objects;
 
@@ -95,7 +97,7 @@ public class Cancion {
 		return "Cancion{" +
 				"id=" + id +
 				", nombre='" + nombre + '\'' +
-				", duracion=" + duracion +
+				", duracion=" + Utils.duracionToString(duracion) +
 				", genero='" + genero + '\'' +
 				", url='" + url + '\'' +
 				", disco=" + disco +

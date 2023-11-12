@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CancionDAO {
 
@@ -19,7 +21,7 @@ public class CancionDAO {
 
     private final static String SearchById = "SELECT id, nombre, duracion, genero, id_disco FROM cancion WHERE id = ?";
 
-    private final static String SearchAll = "SELECT id, nombre, duracion, genero, id_disco FROM cancion LIMIT 15";
+    private final static String SEARCHALL = "SELECT id, nombre, duracion, genero,url, id_disco FROM cancion LIMIT 15";
 
     private Connection connection;
 
@@ -89,4 +91,29 @@ public class CancionDAO {
         }
         return null;
     }
+
+    public List<Cancion> getAllCanciones() {
+        List<Cancion> canciones = new ArrayList<>();
+
+        try (PreparedStatement ps = connection.prepareStatement(SEARCHALL);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Cancion cancion = new Cancion();
+                cancion.setId(rs.getInt("id"));
+                cancion.setNombre(rs.getString("nombre"));
+                cancion.setDuracion(rs.getInt("duracion"));
+                cancion.setGenero(rs.getString("genero"));
+                cancion.setUrl(rs.getString("url"));
+                DiscoDAO discoDAO = new DiscoDAO();
+                Disco d1 = discoDAO.getDiscoById((rs.getInt("id_disco")));
+                cancion.setDisco(d1);
+                canciones.add(cancion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return canciones;
+    }
 }
+

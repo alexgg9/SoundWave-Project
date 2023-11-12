@@ -107,7 +107,6 @@ public class Disco {
                 "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fechaPublicacion=" + fechaPublicacion +
-                ", foto=" + Arrays.toString(foto) +
                 ", reproducion='" + reproduccion + '\'' +
                 ", artista=" + artista +
                 ", Canciones=" + canciones +

@@ -113,7 +113,7 @@ public class Lista {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", suscripciones=" + suscripciones +
-                ", creador=" + creador +
+                ", creador=" + creador.getDni() +
                 ", comentarios=" + comentarios +
                 '}';
     }
