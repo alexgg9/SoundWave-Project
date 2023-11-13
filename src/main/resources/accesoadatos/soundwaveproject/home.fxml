@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="742.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="742.0" style="-fx-background-color: E3E3E3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accesoadatos.soundwaveproject.controller.HomeController">
    <children>
       <TextField alignment="CENTER_RIGHT" layoutX="471.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleSearchAction" prefHeight="24.0" prefWidth="202.0" promptText="¿Qué te apetece buscar?" />
       <AnchorPane layoutX="21.0" layoutY="109.0" prefHeight="313.0" prefWidth="59.0" style="-fx-background-color: #185B8E; -fx-background-radius: 30px;">
@@ -65,8 +65,37 @@
       </ImageView>
       <Text layoutX="106.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artistas populares" />
       <Text layoutX="110.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discos populares" />
-      <HBox fx:id="fila" layoutX="106.0" layoutY="132.0" prefHeight="126.0" prefWidth="482.0" />
-      <HBox fx:id="fila1" layoutX="110.0" layoutY="327.0" prefHeight="126.0" prefWidth="482.0" />
+      <HBox fx:id="fila" layoutX="130.0" layoutY="138.0" prefHeight="128.0" prefWidth="438.0">
+         <children>
+            <ImageView fitHeight="127.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/artistpics/feid.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/artistpics/neffex.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="132.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/artistpics/ctangana.jpg" />
+               </image>
+            </ImageView>
+         </children></HBox>
+      <HBox fx:id="fila1" layoutX="192.0" layoutY="320.0" prefHeight="150.0" prefWidth="302.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/DiscCovers/c-tangana-el-madrileno.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/DiscCovers/ToPimpAButterfly.jpg" />
+               </image>
+            </ImageView>
+         </children></HBox>
       <Button layoutX="30.0" layoutY="16.0" mnemonicParsing="false" onAction="#loadProfileView" style="-fx-background-color: none;">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0">

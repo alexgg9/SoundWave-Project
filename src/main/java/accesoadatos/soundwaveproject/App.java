@@ -43,6 +43,18 @@ public class App extends Application {
         } else if (fxml.equals("list")) {
             newScene = createScene(fxml, 1068, 619);
             primaryStage.setResizable(false);
+        } else if (fxml.equals("userProfile")) {
+        newScene = createScene(fxml, 742, 530);
+        primaryStage.setResizable(false);
+        }else if (fxml.equals("discProfile")) {
+            newScene = createScene(fxml, 742, 530);
+            primaryStage.setResizable(false);
+        }else if (fxml.equals("artistProfile")) {
+            newScene = createScene(fxml, 742, 530);
+            primaryStage.setResizable(false);
+        }else if (fxml.equals("home")) {
+            newScene = createScene(fxml, 742, 530);
+            primaryStage.setResizable(false);
         } else {
             newScene = createScene(fxml, 640, 480);
             primaryStage.setResizable(true);
